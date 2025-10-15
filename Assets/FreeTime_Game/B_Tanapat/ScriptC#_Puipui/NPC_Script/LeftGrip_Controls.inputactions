@@ -1,0 +1,34 @@
+{
+    "name": "LeftGrip_Controls",
+    "maps": [
+        {
+            "name": "Oculus Touch Trigger",
+            "id": "829c457b-dc2e-475f-a485-f81304be13ff",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "f8d8d2e2-44d6-46ff-9275-515ac0c07456",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3e9f10e8-fd08-46f1-9c75-310af074fafb",
+                    "path": "<XRController>{RightHand}/{TriggerTouch}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

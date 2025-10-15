@@ -1,0 +1,34 @@
+{
+    "name": "Trigger touch",
+    "maps": [
+        {
+            "name": "Trigger touch",
+            "id": "e10322d5-915c-4d49-8f28-24b90c81b70f",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d809bf4d-23bd-4b2f-bb56-468ec23deac0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "da96eacb-1031-41d8-9c31-8a3503206675",
+                    "path": "<XRController>{RightHand}/{TriggerTouch}",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
