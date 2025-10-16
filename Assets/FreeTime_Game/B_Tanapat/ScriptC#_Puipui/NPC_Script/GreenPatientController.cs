@@ -7,7 +7,6 @@ public class GreenPatientController : MonoBehaviour
 {
     private Animator animator;
     private NavMeshAgent navMeshAgent;
-
     private const string PARAM_MOVE = "Move";
 
     // การตั้งค่าใน Inspector (สำคัญ: ต้องลากมาใส่ใน Unity Inspector)
