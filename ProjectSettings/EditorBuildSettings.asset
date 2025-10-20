@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FreeTime_Game/A_GameScene/Test_Asset.unity
+    path: Assets/FreeTime_Game/A_GameScene/Pick_Item.unity
     guid: fbf5ff12d33a18b48a85f36c51e338b7
+  - enabled: 1
+    path: Assets/FreeTime_Game/A_GameScene/TriageRoom.unity
+    guid: e9b4dd55883487148ac308dd76797a7a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e84300b0ac8552a48baf232067b52b84, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ea7ffa051c087894fa5a811d0670f445, type: 2}
