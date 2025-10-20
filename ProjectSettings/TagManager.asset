@@ -12,6 +12,9 @@ TagManager:
   - Red
   - Yellow
   - Green
+  - RedTag
+  - BlackTag
+  - YellowTag
   layers:
   - Default
   - TransparentFX
