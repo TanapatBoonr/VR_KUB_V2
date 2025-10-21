@@ -14,7 +14,7 @@ public class PatientAnimatorController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // ตรวจสอบว่าเริ่มต้นที่ท่านั่ง (G2 Sitting Pose)
-        animator.Play("Sitting");
+        animator.Play("G2 Sitting Pose");
     }
 
     private void Update()
@@ -34,16 +34,16 @@ public class PatientAnimatorController : MonoBehaviour
 
     public void StartInteractionSequence()
     {
-        // 1. เปลี่ยนจาก Sitting ไป Standing Up (ใช้ Trigger หรือ Play)
-        // ถ้าคุณตั้ง Transition จาก Sitting > Standing Up ใน Animator ให้ใช้
+        // 1. เปลี่ยนจาก Sitting ไป G2 Standing Up (ใช้ Trigger หรือ Play)
+        // ถ้าคุณตั้ง Transition จาก Sitting > G2 Standing Up ใน Animator ให้ใช้
         // animator.SetTrigger("StandUp"); 
         
         // สำหรับตอนนี้ ใช้ Play โดยตรง เพราะเราต้องการควบคุมลำดับ
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Sitting"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("G2 Sitting Pose"))
         {
-             // 1. Standing Up
-             animator.Play("Standing Up"); 
-             Invoke("StartWalkSequence", 2f); // หน่วงเวลา 2 วินาทีเพื่อให้แอนิเมชัน Standing Up จบ
+             // 1. G2 Standing Up
+             animator.Play("G2 Standing Up"); 
+             Invoke("StartWalkSequence", 2f); // หน่วงเวลา 2 วินาทีเพื่อให้แอนิเมชัน G2 Standing Up จบ
         }
     }
 
@@ -51,7 +51,7 @@ public class PatientAnimatorController : MonoBehaviour
     {
         // 2. เริ่มต้น Walk
         animator.SetBool(PARAM_MOVE, true);
-        animator.Play("Walk");
+        animator.Play("G2 Walk");
         
         // (คุณจะต้องมีเงื่อนไขในโค้ดอื่น หรือใน Animator เพื่อเปลี่ยนจาก Walk > IDEL > Walk)
         // หรือถ้าต้องการให้เดินไป IDEL ทันทีหลังยืน:
@@ -60,9 +60,9 @@ public class PatientAnimatorController : MonoBehaviour
     
     private void StartIdleSequence()
     {
-        // 3. เปลี่ยนเป็น IDEL
+        // 3. เปลี่ยนเป็น G2_Idle
         animator.SetBool(PARAM_MOVE, false);
-        animator.Play("IDEL");
+        animator.Play("G2_Idle");
     }
 
     // ฟังก์ชันนี้สามารถถูกเรียกใช้โดยปุ่ม 'พูดคุย' ในภายหลังได้

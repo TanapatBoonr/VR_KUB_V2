@@ -2013,7 +2013,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5837150490498646047}
   - component: {fileID: 567899565199891045}
-  - component: {fileID: 3125210283849311144}
   - component: {fileID: 393509181475244631}
   - component: {fileID: 5512182314325255528}
   - component: {fileID: 1980251347755849809}
@@ -2070,20 +2069,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3125210283849311144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6506129011009854117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c66b970800b43441885a1bee66c0ca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  proximityRange: 3
 --- !u!114 &393509181475244631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2099,6 +2084,7 @@ MonoBehaviour:
   greenTreatmentArea: {fileID: 0}
   playerTransform: {fileID: 0}
   walkTowardsPlayerDistance: 3
+  standUpDuration: 6
 --- !u!195 &5512182314325255528
 NavMeshAgent:
   m_ObjectHideFlags: 0
