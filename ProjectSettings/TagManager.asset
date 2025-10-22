@@ -15,6 +15,7 @@ TagManager:
   - RedTag
   - BlackTag
   - YellowTag
+  - Top gauze
   layers:
   - Default
   - TransparentFX

@@ -139,9 +139,10 @@ public class GreenPatientController : MonoBehaviour
             return;
         }
         
-        animator.Play("G2 Standing Up");
+        // **[แก้ไข]: ใช้ Trigger แทน Play**
+    	animator.SetTrigger("StandUp");
         hasStoodUp = true;
-        Invoke("StartInitialMovement", standUpDuration); 
+    	Invoke("StartInitialMovement", standUpDuration);
     }
 
     private void StartInitialMovement()

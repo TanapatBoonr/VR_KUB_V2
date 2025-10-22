@@ -551,6 +551,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7651769737957794035}
+  - {fileID: 6874120246122555164}
   - {fileID: 8583097121277716224}
   - {fileID: 929841295531113446}
   - {fileID: 3798694830411161193}
@@ -1489,12 +1491,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4891850055674568613}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: 0}
-  m_LocalScale: {x: 0.14894085, y: 0.017212981, z: 0.05400614}
+  m_LocalRotation: {x: 0.051298074, y: 0.0000011571381, z: -0.000013888905, w: 0.9986834}
+  m_LocalPosition: {x: -0, y: -0.17093639, z: 0.24690634}
+  m_LocalScale: {x: 0.14894088, y: 0.017212974, z: 0.054006144}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6874120246122555164}
+  m_Father: {fileID: 6025792579209688987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8613491045603697947
 MeshFilter:
@@ -1753,13 +1755,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5879391615453168569}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.277, z: 0.221}
+  m_LocalRotation: {x: 0.051298074, y: 0.0000011571383, z: -0.000013888909, w: 0.9986834}
+  m_LocalPosition: {x: 0, y: -0.09135738, z: 0.25510323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7651769737957794035}
-  m_Father: {fileID: 5837150490498646047}
+  m_Children: []
+  m_Father: {fileID: 6025792579209688987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1896184559554536439
 SphereCollider:
@@ -2045,7 +2046,6 @@ Transform:
   - {fileID: 2112728899164381323}
   - {fileID: 4926255789250786444}
   - {fileID: 4140986181050911774}
-  - {fileID: 6874120246122555164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 121.773, z: 0}
 --- !u!95 &567899565199891045
@@ -2085,6 +2085,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
+  tagSocket: {fileID: 0}
 --- !u!195 &5512182314325255528
 NavMeshAgent:
   m_ObjectHideFlags: 0

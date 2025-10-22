@@ -6,14 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Green_Tag-Triage.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Green_Tag-Triage.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Megaphone.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Megaphone.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/XR Interaction Setup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/XR Interaction Setup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NavMesh-PlaneForSpawn_A.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NavMesh-PlaneForSpawn_A.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NavMesh-PlaneForSpawn_A.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NavMesh-PlaneForSpawn_A.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/XR Interaction Setup.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/XR Interaction Setup.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G2/G2 Controller Animator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G2/G2 Controller Animator.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G2/G2 Walk.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G2/G2 Walk.fbx.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2_T-post USE.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2_T-post USE.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/MapAS/AssetGame/AssetPlay_Material/Kit_textures/Black_P.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/MapAS/AssetGame/AssetPlay_Material/Kit_textures/Black_P.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/GreenPatientController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/GreenPatientController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/PatientAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/PatientAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/SceneDestinationHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/SceneDestinationHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/SceneTeleportPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/SceneTeleportPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +33,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/CarryOverManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/FacingCameraYaw.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/RedPatientController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/SceneTeleportPoint.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TeleportData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.18/Runtime/BurstCompiler.cs" root0="SKIP_HIGHLIGHTING" />
@@ -113,7 +124,8 @@
       <updated>1760582555428</updated>
       <workItem from="1760582558642" duration="3273000" />
       <workItem from="1760934322584" duration="4310000" />
-      <workItem from="1761019194979" duration="4367000" />
+      <workItem from="1761019194979" duration="9521000" />
+      <workItem from="1761063769144" duration="2539000" />
     </task>
     <servers />
   </component>

@@ -5,26 +5,20 @@ public class SceneDestinationHandler : MonoBehaviour
     void Start()
     {
         string destName = TeleportData.GetDestinationPointName();
+        Transform playerRig = GetPlayerRigTransform();
 
-        if (!string.IsNullOrEmpty(destName))
+        if (!string.IsNullOrEmpty(destName) && playerRig != null)
         {
             // ... (โค้ดค้นหาจุดหมายและย้าย Player) ...
+
+            // ... (โค้ดค้นหา StartingTeleporter และ ResetCooldown) ...
         
             // ***************************************************************
-            // *** NEW: ค้นหาจุดวาปใน Scene ปัจจุบัน (ซึ่งเป็นจุดเริ่มต้นวาป) ***
+            // *** NEW: วางกระเป๋าและสิ่งของลงบนเข็มขัด Player ใน Scene ใหม่ ***
             // ***************************************************************
-        
-            // ค้นหา GameObject ที่มีชื่อตรงกับจุดหมาย (จุดวาป)
-            GameObject startingTeleporter = GameObject.Find(destName);
-            if (startingTeleporter != null)
+            if (CarryOverManager.Instance != null)
             {
-                // NPC.GetComponent<GreenPatientController>() 
-                SceneTeleportPoint tp = startingTeleporter.GetComponent<SceneTeleportPoint>();
-                if (tp != null)
-                {
-                    // สั่งให้จุดวาปที่เพิ่งถูกสร้างขึ้นมาใหม่ เริ่ม Cooldown
-                    tp.ResetCooldown(); 
-                }
+                CarryOverManager.Instance.PlaceCarriedItemsInNewScene(playerRig);
             }
             
             // 4. ล้างข้อมูลจุดหมายเพื่อป้องกันการวาปซ้ำโดยไม่ได้ตั้งใจ
