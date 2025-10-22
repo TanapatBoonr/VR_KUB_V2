@@ -1,0 +1,294 @@
+fileFormatVersion: 2
+guid: 13c5b063da51cc04fb648d8d32851740
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arms_mat
+    second: {fileID: 2100000, guid: 747b811e7a094ee45ade25e87917a251, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_mat
+    second: {fileID: 2100000, guid: d6ae76ec1c047ba4f85153fa7db8e852, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buckle_mat
+    second: {fileID: 2100000, guid: 021b3c7cbb532ae44904bee94eda9606, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ears_mat
+    second: {fileID: 2100000, guid: 7fdfd4d3f936e2b4483ab896449411f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EyeMoisture_mat
+    second: {fileID: 2100000, guid: 23ec4eb56c5c00a449511633709749d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EyeSocket_mat
+    second: {fileID: 2100000, guid: 351c08af2d9b3b540938c5fa47a18cd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyelashes_mat
+    second: {fileID: 2100000, guid: 43b507f689b53cb4fa32bf1673ac4ce3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face_mat
+    second: {fileID: 2100000, guid: 9b1e5f42d6af48d49857f15969b97205, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fingernails_mat
+    second: {fileID: 2100000, guid: e9ea27e03c351de4d968b9f87360521c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrontPanty
+    second: {fileID: 2100000, guid: babcf51bc450d9542ba2b6fbdaec39be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair2_mat
+    second: {fileID: 2100000, guid: 00e73a6a0295eda4ead679e651102677, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HairCap_mat
+    second: {fileID: 2100000, guid: ffe1f592acbf0f848a6a1b59b5c5d183, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair_mat
+    second: {fileID: 2100000, guid: fd3d385259fe67948ac41d582ecedd6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Irises_mat
+    second: {fileID: 2100000, guid: 2e8e91754e21efc489885757634a434a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JacketCollar_mat
+    second: {fileID: 2100000, guid: a2a232f493bcb494c8b832259a749cdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jacket_mat
+    second: {fileID: 2100000, guid: 0fdc6cd0576174f4c8d2c7668f9ae82e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jacket_pocket1_mat
+    second: {fileID: 2100000, guid: f9d1bd96291e361419fba1455267b3b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jacketbelt_mat
+    second: {fileID: 2100000, guid: afc7a42fc87001a47bf84e7016dec55b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jacketpocket2_mat
+    second: {fileID: 2100000, guid: 514b94bf83ab9df4f9391003fcfb8f7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Legs_mat
+    second: {fileID: 2100000, guid: be00a18ec1e77ad41909852fba0a2347, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lips_mat
+    second: {fileID: 2100000, guid: b6c53e27a7b0de04893c324dda83f85c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mouth_mat
+    second: {fileID: 2100000, guid: 8ee760d6d7208a344b51393368f49c14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PantyLace_mat
+    second: {fileID: 2100000, guid: e78def05ed29de74d8a487cc505e09d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pupils_mat
+    second: {fileID: 2100000, guid: a8ca898b57423314893f61de2f3a6bfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sclera_mat
+    second: {fileID: 2100000, guid: fe21f125b1530d145b1ccb09747f5667, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShirtSeam_mat
+    second: {fileID: 2100000, guid: 03399daeb16fbc44b997ef4d77142b14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt_mat
+    second: {fileID: 2100000, guid: 6ae3e97ba17ff654a9488bc1468d432a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShoesStrip_mat
+    second: {fileID: 2100000, guid: 5510d2e31439d9b4aa6b854b2207040c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes_inner_mat
+    second: {fileID: 2100000, guid: 7aa4f9f906b26f342968e5271212c20f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes_metal_mat
+    second: {fileID: 2100000, guid: df3e4d509227d3041a367b034f0f844a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes_sole2_mat
+    second: {fileID: 2100000, guid: 3405c4eceff40484e9d8ed4b1abdd0ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes_sole3_mat
+    second: {fileID: 2100000, guid: 20fad591be5f53142b45df137ff3f8ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes_sole_mat
+    second: {fileID: 2100000, guid: e767edb0bbce39442916c09c696bcbd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skirt_mat
+    second: {fileID: 2100000, guid: 457dbe2a20ec3134eb3820614cfce777, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stocking_mat
+    second: {fileID: 2100000, guid: 5ff47da2844c57a4f8e3b659fba2bb36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teeth_mat
+    second: {fileID: 2100000, guid: 1fec758c23596ea4db36ad45fc5356b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toenails_mat
+    second: {fileID: 2100000, guid: 7dfc16f6e8be1df4a816eee29cd0a6d7, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
