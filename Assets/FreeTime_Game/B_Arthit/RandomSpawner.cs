@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq; 
 
 public class RandomSpawner : MonoBehaviour
 {
@@ -8,20 +9,24 @@ public class RandomSpawner : MonoBehaviour
 
     [Header("ตำแหน่ง Spawn Point ทั้งหมด")]
     public Transform[] spawnPoints; 
+    
+    // ลบ Start() ออก เพื่อให้ ScenarioManager ควบคุมการ Spawn
 
-    private void Start()
+    // เปลี่ยนชื่อฟังก์ชันให้เหมาะสมกับการถูกเรียกภายนอก
+    public void StartSpawning() 
     {
         SpawnPeople();
     }
 
-    void SpawnPeople()
+    private void SpawnPeople()
     {
         if (personPrefabs.Length < spawnPoints.Length)
         {
-            Debug.LogWarning("จำนวน Prefab คนน้อยกว่าจำนวนจุด Spawn!");
+            Debug.LogWarning("จำนวน Prefab คนน้อยกว่าจำนวนจุด Spawn! (Plane: " + gameObject.transform.parent.name + ")");
             return;
         }
 
+        // ... (Logic การสุ่มและ Instantiate เหมือนเดิม) ...
         
         List<int> availableIndices = new List<int>();
         for (int i = 0; i < personPrefabs.Length; i++)
@@ -35,8 +40,9 @@ public class RandomSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, availableIndices.Count);
             int chosenPersonIndex = availableIndices[randomIndex];
             availableIndices.RemoveAt(randomIndex);
-
-            Instantiate(personPrefabs[chosenPersonIndex], spawnPoints[i].position, spawnPoints[i].rotation);
+            
+            // Spawn เป็น Child ของ Spawn Point เพื่อความเป็นระเบียบ
+            Instantiate(personPrefabs[chosenPersonIndex], spawnPoints[i].position, spawnPoints[i].rotation, spawnPoints[i]);
         }
     }
 }
