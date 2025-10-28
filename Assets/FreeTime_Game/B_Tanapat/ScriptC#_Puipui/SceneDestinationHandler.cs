@@ -10,16 +10,12 @@ public class SceneDestinationHandler : MonoBehaviour
         if (!string.IsNullOrEmpty(destName) && playerRig != null)
         {
             // ... (โค้ดค้นหาจุดหมายและย้าย Player) ...
-
+            // โค้ดส่วนนี้จะยังคงอยู่และทำงานตามปกติ
+            
             // ... (โค้ดค้นหา StartingTeleporter และ ResetCooldown) ...
+            // โค้ดส่วนนี้จะยังคงอยู่และทำงานตามปกติ
         
-            // ***************************************************************
-            // *** NEW: วางกระเป๋าและสิ่งของลงบนเข็มขัด Player ใน Scene ใหม่ ***
-            // ***************************************************************
-            if (CarryOverManager.Instance != null)
-            {
-                CarryOverManager.Instance.PlaceCarriedItemsInNewScene(playerRig);
-            }
+            // *** ลบ Logic การวางกระเป๋าที่ขนย้ายออกไปแล้ว ***
             
             // 4. ล้างข้อมูลจุดหมายเพื่อป้องกันการวาปซ้ำโดยไม่ได้ตั้งใจ
             TeleportData.SetDestinationPointName("");

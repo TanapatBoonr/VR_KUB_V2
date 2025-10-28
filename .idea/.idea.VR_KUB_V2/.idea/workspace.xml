@@ -6,42 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Bag valve mask.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Bag valve mask.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Bag valve mask.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Bag valve mask.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Black_Tag-Triage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Black_Tag-Triage.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Black_Tag-Triage.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Black_Tag-Triage.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Endotracheal Tube_A.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Endotracheal Tube_A.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Endotracheal Tube_A.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Endotracheal Tube_A.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Green_Tag-Triage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Green_Tag-Triage.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Green_Tag-Triage.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Green_Tag-Triage.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/KIT.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/KIT.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/KIT.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/KIT.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage A.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage A.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage A.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage A.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage B.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage B.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage C.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage C.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage C.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Medical Elastic Bandage C.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Megaphone.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Megaphone.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Megaphone.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Megaphone.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NG_A.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NG_A.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NG_A.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/NG_A.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/OxygenTank.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/OxygenTank.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/OxygenTank.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/OxygenTank.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Red_Tag-Triage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Red_Tag-Triage.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Red_Tag-Triage.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Red_Tag-Triage.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Top gauze.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Top gauze.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Top gauze.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Top gauze.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Tourniquet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Tourniquet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Tourniquet.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Tourniquet.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Yello_Tag-Triage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Yello_Tag-Triage.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Yello_Tag-Triage.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/Yello_Tag-Triage.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/oxygen_mask_AA.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/oxygen_mask_AA.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/oxygen_mask_AA.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom/oxygen_mask_AA.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/Trigger touch.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/Trigger touch.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/BagController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/BagController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/BagData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/BagData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/CarryOverManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/CarryOverManager.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +121,7 @@
       <workItem from="1761019194979" duration="9521000" />
       <workItem from="1761063769144" duration="2539000" />
       <workItem from="1761546251161" duration="6230000" />
-      <workItem from="1761627892355" duration="4790000" />
+      <workItem from="1761627892355" duration="6324000" />
     </task>
     <servers />
   </component>

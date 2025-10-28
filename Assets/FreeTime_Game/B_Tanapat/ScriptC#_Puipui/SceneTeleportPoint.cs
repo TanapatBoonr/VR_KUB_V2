@@ -44,17 +44,10 @@ public class SceneTeleportPoint : MonoBehaviour
         // 1. หน่วงเวลาก่อนโหลด
         yield return new WaitForSeconds(delayBeforeLoad);
 
-        // 2. *** NEW: สั่งให้ CarryOverManager เตรียมย้ายของ ***
-        if (CarryOverManager.Instance != null)
-        {
-            CarryOverManager.Instance.PrepareForSceneChange();
-        }
-        // *************************************************
-
-        // 3. บันทึกข้อมูลจุดหมายก่อนโหลด Scene
+        // 2. บันทึกข้อมูลจุดหมายก่อนโหลด Scene
         TeleportData.SetDestinationPointName(destinationPointName);
 
-        // 4. โหลด Scene ใหม่
+        // 3. โหลด Scene ใหม่
         SceneManager.LoadScene(destinationSceneName);
     }
 
