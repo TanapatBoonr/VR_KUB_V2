@@ -3,20 +3,27 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro; 
-using UnityEngine.SceneManagement; // ใช้สำหรับการโหลด Scene
+using UnityEngine.SceneManagement; 
 
 public class ScoringManager : MonoBehaviour
 {
-    public static ScoringManager Instance; // Singleton
+    public static ScoringManager Instance; 
     
-    [Header("--- Scene & Time Settings ---")]
+    [Header("--- Scene & Teleport Settings ---")]
+    [Tooltip("ชื่อ Scene ปัจจุบัน (สำหรับปุ่ม Try Again)")]
     public string currentSceneName;
-    public float timeLimitSeconds = 60f; 
+    
+    [Tooltip("ชื่อ Scene ถัดไปเมื่อจบด่าน (เช่น TriageRoom)")]
     public string nextSceneName = "TriageRoom";
+    
+    [Tooltip("ชื่อของ GameObject จุดหมายปลายทางใน Scene ถัดไป (เช่น SpawnPoint_B)")]
+    public string destinationPointName = "SpawnPoint_B"; // ** จุดหมายปลายทางที่จะวาปไป **
+
+    [Header("--- Game & Time Settings ---")]
+    public float timeLimitSeconds = 60f; 
 
     [Header("--- System References ---")]
-    [Tooltip("ลาก PlayerInventory ที่แนบกับกระเป๋ามาใส่")]
-    public PlayerInventory playerInventory;
+    public PlayerInventory playerInventory; // ต้องมีสคริปต์ PlayerInventory ใน Scene
 
     [Header("--- UI Elements (XR UI Canvas)")]
     public TextMeshProUGUI timerText; 
@@ -38,17 +45,14 @@ public class ScoringManager : MonoBehaviour
     public int correctItemScore = 1; 
     public int wrongItemPenalty = -2;
     
-    // Key: Item Name, Value: True=Correct Pick (บันทึกเฉพาะรายการที่หยิบหรือกดสวมใส่)
     private Dictionary<string, bool> itemResults = new Dictionary<string, bool>(); 
     private bool ppeWorn = false; 
 
-    // รายการไอเทมที่ต้องหยิบ (Hardcoded ตามโจทย์)
     private readonly HashSet<string> requiredItems = new HashSet<string>
     {
         "Medical Elastic Bandage A", "Top gauze", "Tourniquet", 
         "Black_Tag-Triage", "Green_Tag-Triage", "Red_Tag-Triage", "Yello_Tag-Triage"
     };
-    
     
     private void Awake()
     {
@@ -62,14 +66,13 @@ public class ScoringManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        // ล้างผลลัพธ์เก่า
         itemResults.Clear();
         ppeWorn = false;
     }
     
     void Start()
     {
-        // ... (โค้ด Start เดิม) ...
+        // การจัดการ UI ตอนเริ่มภารกิจ
         if (missionStartUI != null)
         {
             missionStartUI.SetActive(true);
@@ -92,6 +95,7 @@ public class ScoringManager : MonoBehaviour
         currentTime = timeLimitSeconds;
         UpdateTimerUI(currentTime);
         
+        // ซ่อน Prefab รายการคะแนนที่ใช้เป็น Template
         if (scoreListItemPrefab != null && scoreListItemPrefab.gameObject.activeSelf)
         {
             scoreListItemPrefab.gameObject.SetActive(false);
@@ -105,7 +109,6 @@ public class ScoringManager : MonoBehaviour
 
     void Update()
     {
-        // ... (โค้ด Update เดิม) ...
         if (missionActive)
         {
             if (currentTime > 0)
@@ -120,27 +123,21 @@ public class ScoringManager : MonoBehaviour
             }
         }
     }
-    
-    // ************************************************************
-    // *** PUBLIC FUNCTIONS สำหรับ Unity Button & Game Logic ***
-    // ************************************************************
 
-    // ฟังก์ชันสำหรับบันทึกผลการสวมใส่ PPE (เรียกจากปุ่ม 'สวมใส่' UI)
+    // ฟังก์ชันสำหรับบันทึกสถานะการสวมใส่ PPE
     public void LogPPEWorn(bool wornStatus)
     {
         ppeWorn = wornStatus;
         if (ppeWorn)
         {
-            // บันทึก PPE ลงใน itemResults (ใช้ Key พิเศษเพื่อแยก)
             if (!itemResults.ContainsKey("PPE Lv.C"))
             {
                 itemResults.Add("PPE Lv.C", true); 
-                Debug.Log($"Scoring: Logged PPE Lv.C as worn and correct.");
+                Debug.Log("Scoring: Logged PPE Lv.C as worn and correct.");
             }
         }
         else
         {
-            // ถ้ามีการกดสวมใส่ซ้ำและสถานะเป็น False (เผื่อกรณีมีปุ่มถอด)
             if (itemResults.ContainsKey("PPE Lv.C"))
             {
                  itemResults.Remove("PPE Lv.C");
@@ -157,14 +154,12 @@ public class ScoringManager : MonoBehaviour
         Debug.Log("Pick Item Mission Started! Timer is running.");
     }
 
-    // ฟังก์ชันที่ถูกเรียกโดยปุ่ม 'เสร็จสิ้น' (End Mission)
     public void EndMission(bool completedByPlayer)
     {
         if (!missionActive) return;
 
         missionActive = false;
         
-        // 1. ดึงข้อมูลจากกระเป๋าและประมวลผลก่อนจบภารกิจ
         ProcessInventoryForScoring();
 
         float timeTaken = timeLimitSeconds - currentTime;
@@ -173,9 +168,7 @@ public class ScoringManager : MonoBehaviour
         DisplayScoreSummary(timeTaken, finalScore);
     }
     
-    // ************************************************************
-    // *** CORE LOGIC: ดึงข้อมูลจาก PlayerInventory ***
-    // ************************************************************
+    // ตรวจสอบไอเทมในกระเป๋าและบันทึกคะแนน
     private void ProcessInventoryForScoring()
     {
         if (playerInventory == null)
@@ -184,18 +177,15 @@ public class ScoringManager : MonoBehaviour
             return;
         }
         
-        // 1. เก็บสถานะ PPE ไว้ก่อน แล้วล้าง itemResults
         bool ppeWasWorn = itemResults.ContainsKey("PPE Lv.C") && itemResults["PPE Lv.C"];
         itemResults.Clear(); 
         if (ppeWasWorn)
         {
-            itemResults.Add("PPE Lv.C", true);
+            itemResults.Add("PPE Lv.C", true); // เพิ่มสถานะ PPE กลับเข้าไป
         }
 
-        // 2. ดึงรายการ GameObject ที่อยู่ในกระเป๋าทั้งหมด
         List<GameObject> itemsInBag = playerInventory.GetAllItemsInSockets();
         
-        // 3. วนลูปดูไอเทมที่ผู้เล่นหยิบ
         foreach (GameObject item in itemsInBag)
         {
             ScorableItem scorable = item.GetComponent<ScorableItem>();
@@ -204,56 +194,46 @@ public class ScoringManager : MonoBehaviour
             {
                 string itemName = scorable.ItemDisplayName;
                 
-                // ป้องกันการนับไอเทมซ้ำ ถ้าผู้เล่นหยิบไอเทมชนิดเดียวกันมา 2 ชิ้น
                 if (itemResults.ContainsKey(itemName))
                 {
-                    Debug.LogWarning($"Scoring: Duplicate item {itemName} found in bag. Skipping the duplicate.");
+                    Debug.LogWarning("Scoring: Duplicate item " + itemName + " found in bag. Skipping the duplicate.");
                     continue; 
                 }
 
                 bool isCorrectPick = requiredItems.Contains(itemName); 
                 
                 itemResults.Add(itemName, isCorrectPick);
-                Debug.Log($"Scoring: Logged Item: {itemName}, Correct: {isCorrectPick}");
+                Debug.Log("Scoring: Logged Item: " + itemName + ", Correct: " + isCorrectPick);
             }
             else
             {
-                 // ไอเทมที่อยู่ในกระเป๋าแต่ไม่มี ScorableItem.cs ถือว่าหยิบผิด
-                 // ใช้ชื่อ GameObject เป็น Key
                  string itemName = item.name;
                  if (!itemResults.ContainsKey(itemName))
                  {
                     itemResults.Add(itemName, false);
-                    Debug.LogWarning($"Scoring: Item in bag without ScorableItem.cs (Penalty): {itemName}");
+                    Debug.LogWarning("Scoring: Item in bag without ScorableItem.cs (Penalty): " + itemName);
                  }
             }
         }
         
-        Debug.Log($"Scoring: Total {itemResults.Count} unique items processed (including PPE).");
+        Debug.Log("Scoring: Total " + itemResults.Count + " unique items processed (including PPE).");
     }
-
-
-    // ************************************************************
-    // *** PRIVATE HELPER FUNCTIONS (ส่วน UI และคำนวณ) ***
-    // ************************************************************
 
     private int CalculateFinalScore()
     {
         int score = 0;
         
-        // 1. คำนวณคะแนนจาก Item และ PPE
         foreach (var item in itemResults)
         {
             if (item.Key == "PPE Lv.C")
             {
-                // คะแนน PPE (จะถูกนับเมื่อ item.Value เป็น true เท่านั้น ซึ่งถูกกำหนดไว้ใน LogPPEWorn)
                 score += item.Value ? ppeScoreValue : 0;
             }
-            else if (item.Value) // Item ที่หยิบถูก
+            else if (item.Value) 
             {
                 score += correctItemScore;
             }
-            else // Item ที่หยิบผิด (Penalty)
+            else 
             {
                 score += wrongItemPenalty;
             }
@@ -272,7 +252,7 @@ public class ScoringManager : MonoBehaviour
             return;
         }
 
-        // 1. เคลียร์รายการเดิมทั้งหมด
+        // ล้างรายการคะแนนเก่า
         foreach (Transform child in scoreListContainer)
         {
             if (child.gameObject != scoreListItemPrefab.gameObject)
@@ -281,10 +261,8 @@ public class ScoringManager : MonoBehaviour
             }
         }
         
-        // 2. วนลูปแสดงผลลัพธ์ของ Item และ PPE ทั้งหมด
         if (itemResults.Count == 0)
         {
-            // แสดงข้อความถ้าไม่มีการหยิบไอเทมที่เกี่ยวข้องเลย
             TextMeshProUGUI listItem = Instantiate(scoreListItemPrefab, scoreListContainer);
             listItem.gameObject.SetActive(true);
             listItem.text = "<color=#FFA500>• ไม่มีการหยิบไอเทมที่ถูกบันทึก</color>";
@@ -300,42 +278,55 @@ public class ScoringManager : MonoBehaviour
 
                 if (itemName == "PPE Lv.C")
                 {
-                    // รายการ PPE (ถือว่าถูกต้องเสมอถ้าอยู่ใน List เพราะถูกใส่เข้ามาเมื่อกดสวมใส่)
-                    resultText = $"PPE Lv.C (สวมใส่ถูกต้อง! +{ppeScoreValue} คะแนน)";
+                    // PPE ถูกนับใน itemResults อยู่แล้ว
+                    resultText = "PPE Lv.C (สวมใส่ถูกต้อง! +" + ppeScoreValue + " คะแนน)";
                     colorHex = "#32CD32"; 
                 }
                 else if (isCorrect)
                 {
-                    // รายการ Item ที่หยิบถูก
-                    resultText = $"{itemName} (ถูกต้อง! +{correctItemScore} คะแนน)";
-                    colorHex = "#32CD32"; // Green
+                    resultText = itemName + " (ถูกต้อง! +" + correctItemScore + " คะแนน)";
+                    colorHex = "#32CD32"; 
                 }
                 else 
                 {
-                    // รายการ Item ที่หยิบผิด
-                    resultText = $"{itemName} (หยิบผิด! {wrongItemPenalty} คะแนน)";
-                    colorHex = "#FF0000"; // Red
+                    resultText = itemName + " (หยิบผิด! " + wrongItemPenalty + " คะแนน)";
+                    colorHex = "#FF0000"; 
                 }
 
                 TextMeshProUGUI listItem = Instantiate(scoreListItemPrefab, scoreListContainer);
                 listItem.gameObject.SetActive(true);
-                listItem.text = $"<color={colorHex}>• {resultText}</color>";
+                listItem.text = "<color=" + colorHex + ">• " + resultText + "</color>";
             }
         }
         
-        // 3. แสดงคะแนนรวม
         if (totalScoreText != null) totalScoreText.text = "คะแนนรวม: " + currentTotalScore.ToString() + " คะแนน";
         
-        // 4. แสดงเวลาที่ใช้ไป
         if (timeTakenText != null) timeTakenText.text = "เวลาที่ใช้ไป: " + FormatTime(timeTaken);
         
-        // 5. บังคับให้ Layout Group อัปเดต
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scoreListContainer);
 
-        // 6. แสดง UI สรุปผล
         if (scoreSummaryUI != null) scoreSummaryUI.SetActive(true);
     }
 
+    /// <summary>
+    /// ฟังก์ชันที่ผูกกับปุ่ม 'ต่อไป' ใน UI สรุปผล เพื่อโหลด Scene ถัดไปและบันทึกจุดวาป
+    /// </summary>
+    public void GoToNextScene()
+    {
+        // 1. บันทึกชื่อจุดหมายปลายทางก่อนโหลด Scene ใหม่
+        if (!string.IsNullOrEmpty(destinationPointName))
+        {
+            TeleportData.SetDestinationPointName(destinationPointName);
+        }
+        else
+        {
+            Debug.LogWarning("Destination Point Name is empty in ScoringManager. Player will spawn at default position.");
+        }
+        
+        // 2. โหลด Scene ใหม่
+        SceneManager.LoadScene(nextSceneName);
+    }
+    
     private string FormatTime(float timeInSeconds)
     {
         float minutes = Mathf.FloorToInt(timeInSeconds / 60);
@@ -349,16 +340,11 @@ public class ScoringManager : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         if (timerText != null)
         {
-            timerText.text = $"เวลา: {minutes:00}:{seconds:00}";
+            timerText.text = "เวลา: " + minutes.ToString("00") + ":" + seconds.ToString("00");
             timerText.color = (timeToDisplay <= 15f && timeToDisplay > 0) ? Color.red : Color.white;
         }
     }
 
-    public void GoToNextScene()
-    {
-        SceneManager.LoadScene(nextSceneName);
-    }
-    
     public void TryAgain()
     {
         if (!string.IsNullOrEmpty(currentSceneName))
