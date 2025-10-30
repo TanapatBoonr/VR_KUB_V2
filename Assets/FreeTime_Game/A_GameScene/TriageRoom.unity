@@ -15813,7 +15813,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 20.43
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -57421,7 +57421,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E15\u0E49\u0E2D\u0E07\u0E40\u0E02\u0E49\u0E32\u0E44\u0E1B\u0E43\u0E19\u0E42\u0E23\u0E07\u0E07\u0E32\u0E19\n\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2A\u0E33\u0E23\u0E27\u0E08\u0E08\u0E38\u0E14\u0E40\u0E2A\u0E35\u0E48\u0E22\u0E07\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E43\u0E19\u0E19\u0E31\u0E49\u0E19\n\u0E41\u0E25\u0E30\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E23\u0E32\u0E22\u0E07\u0E32\u0E19\u0E1C\u0E21"
+  m_text: "\u0E04\u0E38\u0E13\u0E08\u0E30\u0E15\u0E49\u0E2D\u0E07\u0E40\u0E02\u0E49\u0E32\u0E44\u0E1B\u0E43\u0E19\u0E42\u0E23\u0E07\u0E07\u0E32\u0E19\n\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2A\u0E33\u0E23\u0E27\u0E08\u0E08\u0E38\u0E14\u0E40\u0E2A\u0E35\u0E48\u0E22\u0E07\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E43\u0E19\u0E19\u0E31\u0E49\u0E19\n\u0E41\u0E25\u0E30\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E23\u0E32\u0E22\u0E07\u0E32\u0E19\u0E1C\u0E21\n\u0E01\u0E23\u0E38\u0E13\u0E32\u0E01\u0E14
+    Continue \u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E40\u0E23\u0E34\u0E48\u0E21"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b271283913956a247b5dc533f85f4fad, type: 2}
   m_sharedMaterial: {fileID: -4848436510717692044, guid: b271283913956a247b5dc533f85f4fad, type: 2}
@@ -67562,7 +67563,7 @@ RectTransform:
   m_GameObject: {fileID: 855612709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35000002, y: 0.35000002, z: 0.35000002}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 223571613}
@@ -67570,7 +67571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -60.500004}
+  m_AnchoredPosition: {x: 0, y: -63.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855612711
@@ -99160,7 +99161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1229281085
 MonoBehaviour:
   m_ObjectHideFlags: 0
