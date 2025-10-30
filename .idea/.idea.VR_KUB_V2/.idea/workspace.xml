@@ -7,9 +7,12 @@
     <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/LiberationSans SDF - Overlay.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/LiberationSans SDF - Overlay.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Outline.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Outline.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Test_Asset_VFX/XR Interaction Setup 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Test_Asset_VFX/XR Interaction Setup 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Test_Asset_VFX/XR Interaction Setup 1.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Test_Asset_VFX/XR Interaction Setup 1.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/FacingCameraYaw.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/FacingCameraYaw.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/ScoreItem/NameItemPrefabText/NotoSansThai&amp;Eng_SemiCondensed-ExtraLight SDF.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/ScoreItem/NameItemPrefabText/NotoSansThai&amp;Eng_SemiCondensed-ExtraLight SDF.asset.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +33,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/ScoreItem/ScorableItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/ScoreItem/ScoringManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TeleportData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TriageMission/Spawn Point Manager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TriageMission/TriageMissionManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.8.18/Runtime/BurstCompiler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.7/Scripts/Editor/TMPro_FontAssetCreatorWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
@@ -124,7 +129,8 @@
       <workItem from="1761546251161" duration="6230000" />
       <workItem from="1761627892355" duration="9282000" />
       <workItem from="1761671636863" duration="732000" />
-      <workItem from="1761716829482" duration="621000" />
+      <workItem from="1761716829482" duration="1232000" />
+      <workItem from="1761723107153" duration="2013000" />
     </task>
     <servers />
   </component>

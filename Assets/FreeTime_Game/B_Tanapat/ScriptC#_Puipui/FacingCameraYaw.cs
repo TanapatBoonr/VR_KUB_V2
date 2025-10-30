@@ -9,10 +9,16 @@ public class FacingCameraYaw : MonoBehaviour
     public float followDistance = 0.5f;
 
     [Tooltip("ความสูงสัมพัทธ์ของ Socket (สำหรับปรับความสูง)")]
-    public float yOffset = -0.3f; 
+    public float yOffset = -0.3f;
     
-    // *** NEW: ตำแหน่งเริ่มต้นของ Socket (ซ้าย/ขวา) ***
-    private Vector3 initialLocalPosition; 
+    [Header("--- Smoothing Settings ---")]
+    [Tooltip("ความเร็วในการหมุนตามกล้อง (ค่าที่เหมาะสมคือ 5 - 15)")]
+    public float rotationSpeed = 10f; // NEW: ความเร็วในการหมุน
+    
+    [Tooltip("ความเร็วในการตามตำแหน่งของ Player (ค่าที่เหมาะสมคือ 5 - 15)")]
+    public float positionSpeed = 10f; // NEW: ความเร็วในการตามตำแหน่ง
+
+    private Vector3 initialLocalPosition;
 
     void Start()
     {
@@ -29,30 +35,34 @@ public class FacingCameraYaw : MonoBehaviour
             return;
         }
 
-        // ********** 1. จัดการการหมุน (Rotation) **********
+        // ********** 1. จัดการการหมุน (Rotation) - ใช้ Slerp **********
         
-        // ใช้การหมุนแกน Y (Yaw) ของกล้องเท่านั้น
-        Quaternion cameraYaw = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-        transform.rotation = cameraYaw;
-
-        // ********** 2. จัดการตำแหน่ง (Position) **********
-
-        // 2.1 คำนวณตำแหน่งศูนย์กลางของ Rig (ตำแหน่งที่ Player ยืนอยู่)
-        Vector3 targetPosition = cameraTransform.parent.position; 
+        // คำนวณ Rotation เป้าหมาย (ใช้ Yaw ของกล้องเท่านั้น)
+        Quaternion targetYawRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
         
-        // 2.2 เพิ่ม Y Offset (ความสูง)
+        // ใช้ Slerp (Spherical Linear Interpolation) เพื่อให้การหมุนนุ่มนวล
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation, 
+            targetYawRotation, 
+            Time.deltaTime * rotationSpeed
+        );
+
+        // ********** 2. จัดการตำแหน่ง (Position) - ใช้ Lerp **********
+        
+        // 2.1 คำนวณตำแหน่งศูนย์กลางของ Rig
+        Vector3 rigCenterPosition = cameraTransform.parent.position;
+        
+        // 2.2 คำนวณตำแหน่งเป้าหมายสุดท้าย (Target Position)
+        Vector3 targetPosition = rigCenterPosition;
         targetPosition.y += yOffset;
-        
-        // 2.3 คำนวณตำแหน่งด้านหน้า (ตามทิศทางที่ Socket หันอยู่)
-        //     - ใช้ transform.forward ที่คำนวณจาก cameraYaw (ไม่ก้ม/เงย)
-        targetPosition += transform.forward * followDistance;
-        
-        // *** NEW: เพิ่มการชดเชยซ้าย/ขวา (Lateral Offset) ***
-        //     - ใช้ transform.right (ทิศทางขวาของ Socket)
-        //     - คูณด้วยค่า X จากตำแหน่ง Local Position เดิม (ค่าบวกสำหรับ R, ค่าลบสำหรับ L)
-        targetPosition += transform.right * initialLocalPosition.x;
+        targetPosition += transform.forward * followDistance; // เดินหน้าตามทิศทางที่ Socket กำลังหัน
+        targetPosition += transform.right * initialLocalPosition.x; // ชดเชยซ้าย/ขวา
 
-        // 2.4 กำหนดตำแหน่งสุดท้าย
-        transform.position = targetPosition;
+        // ใช้ Lerp (Linear Interpolation) เพื่อให้การตามตำแหน่งนุ่มนวล
+        transform.position = Vector3.Lerp(
+            transform.position, 
+            targetPosition, 
+            Time.deltaTime * positionSpeed
+        );
     }
 }
