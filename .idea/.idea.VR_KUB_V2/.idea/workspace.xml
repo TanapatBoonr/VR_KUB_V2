@@ -4,7 +4,113 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="" />
+    <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Diffuse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Diffuse.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Glossiness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Glossiness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Specular.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1001_Specular.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1002_Diffuse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1002_Diffuse.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1002_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Ch02_nonPBR.fbm/Ch02_1002_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_down.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_down.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_down.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_down.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_stand up.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_stand up.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_walk.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/G4_walk.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_1001_Diffuse.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_1001_Diffuse.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_1002_Diffuse.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_1002_Diffuse.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Diffuse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Diffuse.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Glossiness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Glossiness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Specular.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1001_Specular.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1002_Diffuse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1002_Diffuse.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1002_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbm/Ch02_1002_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G4/Materials/Ch02_nonPBR.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_T-pose.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_T-pose.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_Walking.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_Walking.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_down.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_down.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_down.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_down.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_stand up.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/G5_stand up.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Normal1_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarBodyMale_Normal1_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Color_512.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Color_512.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Color_512.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Color_512.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Normal_512.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarEyes_Normal_512.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Normal1_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarHeadMale_Normal1_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarLeftCornea_Color_512.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarLeftCornea_Color_512.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarLeftCornea_Color_512.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarLeftCornea_Color_512.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarRightCornea_Color_512.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarRightCornea_Color_512.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarRightCornea_Color_512.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarRightCornea_Color_512.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Normal1_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/AvatarTeeth_Normal1_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Normal_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/jeans_AZAT_Normal_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Normal_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/polo_Getik_Normal_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Color_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Color_1K.jpeg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Color_1K.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Color_1K.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Normal_1K.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Jira_Kira/G/G5/textures/sneakers_AZAT_Normal_1K.jpeg.meta" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,6 +231,7 @@
       <workItem from="1761716829482" duration="1232000" />
       <workItem from="1761723107153" duration="2013000" />
       <workItem from="1761808155142" duration="12044000" />
+      <workItem from="1761884062974" duration="854000" />
     </task>
     <servers />
   </component>
