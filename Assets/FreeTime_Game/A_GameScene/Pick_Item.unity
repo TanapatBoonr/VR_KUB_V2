@@ -3128,7 +3128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSceneName: Pick_Item
-  nextSceneName: TriageRoom
+  nextSceneName: TriageRoom B
   destinationPointName: Warp_Point&B
   timeLimitSeconds: 240
   playerInventory: {fileID: 373155876}
@@ -3139,9 +3139,9 @@ MonoBehaviour:
   timeTakenText: {fileID: 1350621756}
   scoreListContainer: {fileID: 1958415259}
   scoreListItemPrefab: {fileID: 784648479195116913, guid: 263373a140a92754f8ca64acd3d191fe, type: 3}
-  ppeScoreValue: 10
+  ppeScoreValue: 5
   correctItemScore: 1
-  wrongItemPenalty: 0
+  wrongItemPenalty: -2
 --- !u!4 &533375577
 Transform:
   m_ObjectHideFlags: 0
