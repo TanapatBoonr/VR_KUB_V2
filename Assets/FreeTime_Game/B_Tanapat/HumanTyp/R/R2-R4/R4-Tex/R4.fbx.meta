@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d992ac2ccd1be74f8d97fa1cfd062e4
+guid: 66883ff30bd4af949a394c56bd3a4d41
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: PackedMaterial0
-    second: {fileID: 2100000, guid: df0a958bb28b08a4fbe89feae64503e8, type: 2}
+    second: {fileID: 2100000, guid: cc4e00a36e0dac945be4d21611881789, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -104,7 +104,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

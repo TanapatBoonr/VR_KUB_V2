@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit; // <<< บรรทัดนี้แก้ไข Error CS0246
+using UnityEngine.XR.Interaction.Toolkit;
+using System.Linq; 
 
 // ***************************************************************
 // TriageColor ถูกดึงมาจาก TriageEnums.cs
@@ -20,30 +21,32 @@ public class TriageTagHandler : MonoBehaviour
              greenPatient = other.GetComponentInParent<GreenPatientController>();
         }
         
-        // 2. พยายามดึงสคริปต์ RedPatientController
-        // (ต้องแน่ใจว่า RedPatientController มีฟังก์ชัน ReceiveTriageTag(string) แล้ว ตามที่แก้ไขไปก่อนหน้า)
-        RedPatientController redPatient = other.GetComponent<RedPatientController>();
-        if (redPatient == null)
+        // 2. พยายามดึงสคริปต์ EmergencyPatientController (สำหรับ Red/Yellow)
+        EmergencyPatientController emergencyPatient = other.GetComponent<EmergencyPatientController>();
+        if (emergencyPatient == null)
         {
-             redPatient = other.GetComponentInParent<RedPatientController>();
+             emergencyPatient = other.GetComponentInParent<EmergencyPatientController>();
         }
 
         // 3. ถ้าพบ Controller ที่เกี่ยวข้อง
         if (greenPatient != null) 
         {
-            // พบผู้ป่วยสีเขียว: เรียกฟังก์ชันรับ Tag
+            // *** Logic สำหรับผู้ป่วยสีเขียว ***
+            // Green Patient จะรับ Tag ทันที
             greenPatient.ReceiveTriageTag(tagColor.ToString()); 
             AttachTagToPatient(greenPatient.transform);
         }
-        else if (redPatient != null)
+        else if (emergencyPatient != null)
         {
-            // พบผู้ป่วยสีแดง: เรียกฟังก์ชันรับ Tag
-            redPatient.ReceiveTriageTag(tagColor.ToString());
-            AttachTagToPatient(redPatient.transform);
+            // *** Logic สำหรับผู้ป่วย Red/Yellow ***
+            // EmergencyPatientController จะรับ Tag เพื่อจัดการ Logic ภายใน/คะแนน
+            // การติด Tag จริงๆ ควรเกิดขึ้นผ่าน Socket (OnTagAttached ใน EmergencyPatientController)
+            emergencyPatient.ReceiveTriageTag(tagColor.ToString());
+            AttachTagToPatient(emergencyPatient.transform); // ติด Tag เข้ากับตัว NPC
         }
         else
         {
-            Debug.LogWarning("TriageTagHandler: Failed to find Green/Red Patient Controller on " + other.gameObject.name + ".");
+            Debug.LogWarning("TriageTagHandler: Failed to find Green/Emergency Patient Controller on " + other.gameObject.name + ".");
         }
     }
     
@@ -71,7 +74,7 @@ public class TriageTagHandler : MonoBehaviour
         if (col != null) col.enabled = false;
         
         // ปิดการทำงานของ Grab Interactable เพื่อให้ผู้เล่นไม่สามารถดึง Tag ออกมาได้อีก
-        if (TryGetComponent<XRGrabInteractable>(out XRGrabInteractable grab)) // ตอนนี้รู้จัก XRGrabInteractable แล้ว
+        if (TryGetComponent<XRGrabInteractable>(out XRGrabInteractable grab)) 
         {
             grab.enabled = false;
         }
