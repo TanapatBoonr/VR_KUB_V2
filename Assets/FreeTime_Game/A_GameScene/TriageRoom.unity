@@ -11162,12 +11162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 759722526}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 759722526}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 1175745595}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!1001 &150241521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13153,7 +13153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &177667398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14279,11 +14279,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2079799127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &189705962 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7397704186590698540, guid: 097aa9bf5f4d4174882d5b06c97400dc, type: 3}
-  m_PrefabInstance: {fileID: 389104660159303469}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190326924 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f8631dd61a0587d45a9cac6e9af89582, type: 3}
@@ -17932,7 +17927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &244648415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25091,7 +25086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &330970924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27781,12 +27776,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 838895948}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 838895948}
   walkTowardsPlayerDistance: 3
   standUpDuration: 2.7
   tagSocket: {fileID: 1252437165}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!95 &364678991
 Animator:
   serializedVersion: 5
@@ -31549,7 +31544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &393288152
 Transform:
   m_ObjectHideFlags: 0
@@ -35875,7 +35870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452416004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41805,12 +41800,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 619422564}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 619422564}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 2116141289}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!1 &516776149
 GameObject:
   m_ObjectHideFlags: 0
@@ -43169,7 +43164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &529108858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46524,7 +46519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &570831517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55178,12 +55173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 1
-  maxTimeLimit: 120
-  criticalColor: 2
-  requiredTagName: Yello_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 684323721}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1 &667833427
 GameObject:
   m_ObjectHideFlags: 0
@@ -55813,7 +55804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &677718208
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56686,12 +56677,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 1547099533}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 1547099533}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 711648778}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!195 &689821293
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -58187,12 +58178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 2
-  maxTimeLimit: 120
-  criticalColor: 3
-  requiredTagName: Red_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 474368589}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1 &705299663 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ba605efbcfc74046bab943c5dc5cdf1, type: 3}
@@ -58936,7 +58923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &716205780
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59241,6 +59228,10 @@ PrefabInstance:
     - target: {fileID: 8736301873617300567, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
       propertyPath: m_Name
       value: Red_Tag-Triage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8736301873617300567, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63310,12 +63301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 1258933235}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 1258933235}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 1577270108}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!1001 &767199894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65355,7 +65346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &797356684
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72854,7 +72845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &879446607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -75485,7 +75476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &905376831
 RectTransform:
   m_ObjectHideFlags: 0
@@ -91201,6 +91192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Black_Tag-Triage
       objectReference: {fileID: 0}
+    - target: {fileID: 7967327165859228140, guid: 2a5762be04a70f64b8466dd0e8d85a28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -91226,7 +91221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1117132351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95170,6 +95165,10 @@ PrefabInstance:
     - target: {fileID: 2141945066501958971, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
       propertyPath: m_Name
       value: Yello_Tag-Triage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141945066501958971, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3135689428491597620, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
       propertyPath: m_Enabled
@@ -99628,7 +99627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1193487619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -107589,12 +107588,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 1430365903}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 1430365903}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 674622311}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!95 &1285773861
 Animator:
   serializedVersion: 5
@@ -114212,7 +114211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1365496968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -121756,7 +121755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1478419982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -126220,12 +126219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 1
-  maxTimeLimit: 120
-  criticalColor: 2
-  requiredTagName: Yello_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 1014757584}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1 &1544236743
 GameObject:
   m_ObjectHideFlags: 0
@@ -127251,12 +127246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 1673343268}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 1673343268}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 742763711}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!195 &1557597101
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -137565,12 +137560,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 826857158}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 826857158}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 2113636196}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!1 &1687911961
 GameObject:
   m_ObjectHideFlags: 0
@@ -139702,6 +139697,10 @@ PrefabInstance:
     - target: {fileID: 3157624771961636339, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
       propertyPath: m_Name
       value: Green_Tag-Triage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157624771961636339, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4006587545269098990, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
       propertyPath: m_LocalPosition.x
@@ -143920,7 +143919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1763272937
 RectTransform:
   m_ObjectHideFlags: 0
@@ -144942,7 +144941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 215.96
+      value: 215.92
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalPosition.y
@@ -144950,23 +144949,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 120.8
+      value: 120.1
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.016304104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9998671
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -144974,7 +144973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 181.868
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3807169914577298771, guid: 4f87671e2eaacdb4e8ef4ee632e700be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -145034,7 +145033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1776288326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -147249,7 +147248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1809526978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157002,7 +157001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1916961087
 Transform:
   m_ObjectHideFlags: 0
@@ -159210,7 +159209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1948587625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -161737,12 +161736,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490ff2e59e973f6428f389ea7895180f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTreatmentArea: {fileID: 1015073882}
   playerTransform: {fileID: 535356900}
+  greenTreatmentArea: {fileID: 1015073882}
   walkTowardsPlayerDistance: 3
   standUpDuration: 6
   tagSocket: {fileID: 755164122}
-  requiredTagName: Green_Tag-Triage
+  correctTagPrefab: {fileID: 0}
 --- !u!95 &1975445411
 Animator:
   serializedVersion: 5
@@ -167386,7 +167385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2061667279
 RectTransform:
   m_ObjectHideFlags: 0
@@ -175065,6 +175064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Army Stretcher
       objectReference: {fileID: 0}
+    - target: {fileID: 7397704186590698540, guid: 097aa9bf5f4d4174882d5b06c97400dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7917957545692022422, guid: 097aa9bf5f4d4174882d5b06c97400dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 184.49
@@ -175287,12 +175290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 2
-  maxTimeLimit: 120
-  criticalColor: 3
-  requiredTagName: Red_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 266081537}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1 &7371687520481924468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2717518954196938069, guid: da07c51563a0e6b4f8c9a52f52514ec7, type: 3}
@@ -175311,12 +175310,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 2
-  maxTimeLimit: 120
-  criticalColor: 3
-  requiredTagName: Red_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 677962978}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1001 &7460444908383459844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175495,12 +175490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patientColor: 2
-  maxTimeLimit: 120
-  criticalColor: 3
-  requiredTagName: Red_Tag-Triage
+  correctTagPrefab: {fileID: 0}
   tagSocket: {fileID: 1259190441}
-  stretcherObject: {fileID: 189705962}
-  allWounds: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -175511,6 +175502,7 @@ SceneRoots:
   - {fileID: 1793833530}
   - {fileID: 1261834768}
   - {fileID: 1420655405}
+  - {fileID: 389104660159303469}
   - {fileID: 456621562}
   - {fileID: 1193543691}
   - {fileID: 1689759991}
@@ -175542,7 +175534,6 @@ SceneRoots:
   - {fileID: 1324375950}
   - {fileID: 35821876}
   - {fileID: 1773947324}
-  - {fileID: 389104660159303469}
   - {fileID: 1159747547}
   - {fileID: 718313198}
   - {fileID: 1712685192}

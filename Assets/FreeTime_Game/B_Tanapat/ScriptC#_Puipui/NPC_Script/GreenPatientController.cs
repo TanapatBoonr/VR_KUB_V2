@@ -1,206 +1,205 @@
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
 using UnityEngine.XR.Interaction.Toolkit;
-using System.Collections; // เพิ่มเข้ามาสำหรับ Coroutine
-using System.Collections.Generic; 
-
-// ***************************************************************
-// TriageColor ถูกดึงมาจาก TriageEnums.cs
-// ***************************************************************
+using System.Collections;
 
 public class GreenPatientController : MonoBehaviour
 {
     private Animator animator;
-    private NavMeshAgent navMeshAgent;
+    private NavMeshAgent agent;
 
-    // พารามิเตอร์ของ Animator (ใช้ชื่อกลางๆ ที่ใช้กับทุกโมเดล)
-    private const string PARAM_STANDUP_TRIGGER = "StandUp"; // Trigger สำหรับเริ่มลุกยืน
-    private const string PARAM_MOVE = "Move";              // Bool สำหรับ Walk/Idle
+    private const string PARAM_STANDUP_TRIGGER = "StandUp";
+    private const string PARAM_MOVE = "Move";
 
-    // การตั้งค่าใน Inspector (สำคัญ: ต้องลากมาใส่ใน Unity Inspector)
-    [Header("Triage & Movement Settings")]
-    [Tooltip("จุดหมายปลายทางสุดท้าย (Plane_G)")]
-    public Transform greenTreatmentArea; 
-    
-    [Tooltip("ลาก XR Rig/Player's Camera มาใส่")]
-    public Transform playerTransform; 
-    
-    [Tooltip("NPC จะหยุดยืนห่างจาก Player กี่เมตร")]
-    public float walkTowardsPlayerDistance = 3f; 
-    
-    [Tooltip("ระยะเวลาที่ใช้ในการลุกขึ้นยืน (ใช้สำหรับการหน่วงเวลา)")]
-    public float standUpDuration = 6.0f; 
+    [Header("Movement Settings")]
+    public Transform playerTransform;
+    public Transform greenTreatmentArea;
+    public float walkTowardsPlayerDistance = 3f;
+    public float standUpDuration = 6f;
 
-    [Header("Triage Socket")]
-    [Tooltip("ลาก XR Socket บน NPC มาใส่")]
-    public XRSocketInteractor tagSocket; 
+    [Header("Triage Tag Settings")]
+    [Tooltip("ลาก XR Socket Interactor ที่ติดอยู่กับตัว NPC มาใส่")]
+    public XRSocketInteractor tagSocket;
 
-    // *** ตัวแปรนี้จำเป็นสำหรับการอ้างอิง Tag (แต่ไม่ถูกใช้ใน TriageTagHandler ที่แก้ไขแล้ว) ***
-    [Tooltip("ชื่อ Tag ของบัตร Triage ที่ถูกต้องสำหรับผู้ป่วยรายนี้ (สำหรับอ้างอิง)")]
-    public string requiredTagName = "Green_Tag-Triage"; 
-    
-    // สถานะ
-    private bool isLyingDown = true;
-    private bool isWalkingToPlayer = false; 
-    private bool isMovingToTreatment = false;
-    private bool isTagged = false; // สถานะใหม่เพื่อตรวจสอบว่าถูก Tag แล้วหรือยัง
+    [Tooltip("ลาก Prefab ของบัตรสีเขียวที่ถูกต้องมาใส่ในช่องนี้")]
+    public GameObject correctTagPrefab; // ✅ Prefab ของบัตรที่ถูกต้อง
+
+    private bool isLying = true;
+    private bool isWalkingToPlayer = false;
+    private bool isTagged = false;
+    private bool megaphoneActive = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
-        // Note: Logic การเดินเข้าหา Player จะถูกเรียกใน Update()
+        // ฟัง Event จาก Megaphone
+        MegaphoneController.OnMegaphoneStateChanged += OnMegaphoneStateChanged;
+
+        // ฟัง Event จาก XR Socket (เมื่อมีบัตรถูกวางลงใน Socket)
+        if (tagSocket != null)
+            tagSocket.selectEntered.AddListener(OnTagPlaced);
+    }
+
+    void OnDestroy()
+    {
+        MegaphoneController.OnMegaphoneStateChanged -= OnMegaphoneStateChanged;
+
+        if (tagSocket != null)
+            tagSocket.selectEntered.RemoveListener(OnTagPlaced);
+    }
+
+    // เมื่อมีบัตรถูกวางลงใน Socket
+    private void OnTagPlaced(SelectEnterEventArgs args)
+    {
+        GameObject tagObj = args.interactableObject.transform.gameObject;
+
+        // ✅ ตรวจชื่อ prefab แทน PrefabUtility (ใช้ได้ใน Runtime)
+        if (correctTagPrefab != null && tagObj.name.Contains(correctTagPrefab.name))
+        {
+            Debug.Log($"{name}: ได้รับบัตร Prefab ที่ถูกต้องแล้ว!");
+            ReceiveTriageTag("Green");
+        }
+        else
+        {
+            Debug.LogWarning($"{name}: บัตรที่ใส่มาไม่ตรงกับ Prefab ที่กำหนดไว้!");
+        }
+    }
+
+    // -------------------------------------------------------
+    // โทรโข่ง
+    // -------------------------------------------------------
+    private void OnMegaphoneStateChanged(bool state)
+    {
+        megaphoneActive = state;
+
+        if (megaphoneActive && !isTagged)
+        {
+            if (isLying)
+            {
+                StartCoroutine(StandUpAndWalkToPlayer());
+            }
+            else
+            {
+                StartWalkingToPlayer();
+            }
+        }
+        else if (!megaphoneActive && !isTagged)
+        {
+            StopWalking();
+        }
+    }
+
+    private IEnumerator StandUpAndWalkToPlayer()
+    {
+        if (!isLying) yield break;
+        isLying = false;
+
+        animator.SetTrigger(PARAM_STANDUP_TRIGGER);
+        yield return new WaitForSeconds(standUpDuration);
+
+        StartWalkingToPlayer();
+    }
+
+    private void StartWalkingToPlayer()
+    {
+        if (playerTransform == null) return;
+
+        isWalkingToPlayer = true;
+        agent.enabled = true;
+        agent.isStopped = false;
+        animator.SetBool(PARAM_MOVE, true);
+    }
+
+    private void StopWalking()
+    {
+        if (!isWalkingToPlayer) return;
+
+        agent.isStopped = true;
+        animator.SetBool(PARAM_MOVE, false);
+        isWalkingToPlayer = false;
     }
 
     void Update()
     {
-        // ตรวจสอบว่ายังนอนอยู่และยังไม่ถูก Tag
-        if (isLyingDown && !isTagged)
+        if (isWalkingToPlayer && !isTagged && playerTransform != null)
         {
-            // ตรรกะ: ตรวจสอบระยะห่างจาก Player และเรียก StandUp()
-            if (playerTransform != null && !isWalkingToPlayer)
+            float distance = Vector3.Distance(transform.position, playerTransform.position);
+            if (distance > walkTowardsPlayerDistance)
             {
-                float distance = Vector3.Distance(transform.position, playerTransform.position);
-                if (distance < 5f) // สมมติว่าระยะ 5 เมตร (อาจจะปรับให้ยืนทันทีที่ Scene โหลด)
-                {
-                    // ถ้ายังไม่ถูก Tag ให้ลุกขึ้นยืนแล้วเดินหา Player
-                    StandUp();
-                }
-            }
-        }
-        else if (isWalkingToPlayer)
-        {
-            // ตรรกะ: เดินเข้าหา Player จนถึงระยะที่กำหนด
-            if (navMeshAgent.enabled && playerTransform != null)
-            {
-                float remainingDistance = Vector3.Distance(transform.position, playerTransform.position);
-                
-                if (remainingDistance > walkTowardsPlayerDistance)
-                {
-                    navMeshAgent.SetDestination(playerTransform.position);
-                }
-                else
-                {
-                    // ถึงระยะแล้ว: หยุดเดิน
-                    navMeshAgent.isStopped = true;
-                    animator.SetBool(PARAM_MOVE, false);
-                    isWalkingToPlayer = false;
-                    Debug.Log(gameObject.name + ": Stopped walking towards player.");
-                }
-            }
-        }
-    }
-    
-    // ***************************************************************
-    // Logic การรับ Tag จาก TriageTagHandler
-    // ***************************************************************
-    /// <summary>
-    /// ถูกเรียกจาก TriageTagHandler เมื่อมี Tag มาชน/ติด
-    /// </summary>
-    /// <param name="receivedTagColor">สีของ Tag ที่มาติด (เช่น "Green", "Red")</param>
-    public void ReceiveTriageTag(string receivedTagColor)
-    {
-        if (isTagged) return;
-
-        // ตรวจสอบว่า Tag ที่ได้รับคือ "Green" หรือไม่
-        if (receivedTagColor.Equals(TriageColor.Green.ToString(), System.StringComparison.OrdinalIgnoreCase)) 
-        {
-            isTagged = true;
-            Debug.Log(gameObject.name + ": Correct Triage Tag (Green) received. Starting movement to Treatment Area.");
-            
-            // 1. ถ้ายังนอนอยู่ ให้ลุกขึ้นยืนแล้วค่อยเดินไป Treatment
-            if (isLyingDown)
-            {
-                 StandUp();
-                 StartCoroutine(MoveToTreatmentAfterStandUp());
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(playerTransform.position);
             }
             else
             {
-                 // ถ้าลุกขึ้นยืนอยู่แล้ว (เดินหา Player อยู่) ให้เดินไป Treatment เลย
-                 MoveToTreatmentArea();
+                StopWalking();
+                Debug.Log($"{name}: ถึงระยะกับผู้เล่นแล้ว");
             }
+        }
+    }
 
-            // 2. ถ้าต้องการให้ Tag ติดกับตัว NPC ทันที
-            // *หมายเหตุ: ต้องหา TriageTagHandler ที่เรียกฟังก์ชันนี้เพื่อดึง transform ของ Tag
-            // แต่เนื่องจาก TriageTagHandler เองก็มีฟังก์ชัน AttachTagToPatient
-            // การทำให้ Tag ติดกับตัว NPC ควรทำใน TriageTagHandler หรือใช้ Socket อย่าง Red/Yellow
-            // หากคุณต้องการให้ Tag ติด ให้แน่ใจว่า TriageTagHandler ได้เรียก AttachTagToPatient
+    // -------------------------------------------------------
+    // เมื่อได้รับบัตร (Prefab ที่ถูกต้อง)
+    // -------------------------------------------------------
+    public void ReceiveTriageTag(string receivedTagColor) // ✅ เปลี่ยนเป็น public
+    {
+        if (isTagged) return;
+
+        if (receivedTagColor.Equals("Green", System.StringComparison.OrdinalIgnoreCase))
+        {
+            isTagged = true;
+            Debug.Log($"{name}: ได้รับบัตร {receivedTagColor} แล้ว กำลังไปจุดรักษา...");
+
+            StopWalking();
+            StartCoroutine(MoveToTreatmentAfterStandUp());
         }
         else
         {
-             Debug.LogWarning(gameObject.name + $": Wrong Triage Tag ({receivedTagColor}) used. This patient is Green.");
+            Debug.LogWarning($"{name}: บัตรไม่ถูกต้อง ({receivedTagColor})");
         }
-    }
-    // ***************************************************************
-
-    private void StandUp()
-    {
-        if (!isLyingDown) return;
-
-        isLyingDown = false;
-        animator.SetTrigger(PARAM_STANDUP_TRIGGER);
-        Debug.Log(gameObject.name + ": Starting stand up sequence.");
-        
-        // หยุดเดินหา Player ชั่วคราว (ถ้ามีการเริ่มเดินแล้ว)
-        isWalkingToPlayer = false;
     }
 
     private IEnumerator MoveToTreatmentAfterStandUp()
     {
-        // รอให้ Animation ลุกขึ้นยืนจบก่อน (ใช้ค่า standUpDuration)
-        yield return new WaitForSeconds(standUpDuration); 
-        
-        // ตรวจสอบอีกครั้งเพื่อความปลอดภัย
-        if (isTagged)
+        if (isLying)
         {
-            MoveToTreatmentArea();
+            animator.SetTrigger(PARAM_STANDUP_TRIGGER);
+            yield return new WaitForSeconds(standUpDuration + 0.5f);
         }
+
+        MoveToTreatmentArea();
     }
 
     private void MoveToTreatmentArea()
     {
-        // หยุดเดินหา Player ชั่วคราว (ถ้ามีการเริ่มเดินแล้ว)
-        if (isWalkingToPlayer)
+        if (greenTreatmentArea == null)
         {
-            isWalkingToPlayer = false; 
+            Debug.LogError($"{name}: ยังไม่ได้ตั้งค่า GreenTreatmentArea!");
+            return;
         }
-        
-        isMovingToTreatment = true;
-        
-        // ** ต้องตรวจสอบ NavMesh และ SetDestination
-        if (greenTreatmentArea != null && navMeshAgent != null)
+
+        NavMeshHit hit;
+        if (!NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
         {
-            navMeshAgent.enabled = true;
-            navMeshAgent.isStopped = false;
-            animator.SetBool(PARAM_MOVE, true);
-
-            Vector3 destination = greenTreatmentArea.position;
-
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(destination, out hit, 1.0f, NavMesh.AllAreas))
-            {
-                destination = hit.position;
-            }
-            else
-            {
-                Debug.LogError(gameObject.name + ": ตำแหน่ง Green Treatment Area ไม่อยู่บน NavMesh!");
-                animator.SetBool(PARAM_MOVE, false);
-                isMovingToTreatment = false;
-                return;
-            }
-
-            if (!navMeshAgent.SetDestination(destination))
-            {
-                Debug.LogError(gameObject.name + ": NavMesh Agent คำนวณเส้นทางไป Green Treatment Area ไม่ได้!");
-                animator.SetBool(PARAM_MOVE, false);
-                isMovingToTreatment = false;
-            }
-            // เมื่อเดินไปถึง NavMeshAgent จะหยุดเอง
+            Debug.LogWarning($"{name}: NPC ยังไม่อยู่บน NavMesh จะรอ 0.5 วินาทีแล้วลองใหม่...");
+            StartCoroutine(WaitAndRetryMove());
+            return;
         }
-        else
+
+        agent.enabled = true;
+        agent.isStopped = false;
+        animator.SetBool(PARAM_MOVE, true);
+
+        if (!agent.SetDestination(greenTreatmentArea.position))
         {
-             Debug.LogError(gameObject.name + ": Green Treatment Area หรือ NavMeshAgent ไม่ถูกกำหนดค่า!");
+            Debug.LogWarning($"{name}: ไม่สามารถ SetDestination ได้");
         }
+    }
+
+    private IEnumerator WaitAndRetryMove()
+    {
+        yield return new WaitForSeconds(0.5f);
+        MoveToTreatmentArea();
     }
 }
