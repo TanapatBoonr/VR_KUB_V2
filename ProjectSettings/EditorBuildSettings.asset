@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/FreeTime_Game/A_GameScene/MainMenu.unity
     guid: 4115251fc9dea094780ccad380aca855
-  - enabled: 0
+  - enabled: 1
     path: Assets/FreeTime_Game/A_GameScene/TriageRoom.unity
     guid: e9b4dd55883487148ac308dd76797a7a
   - enabled: 1
