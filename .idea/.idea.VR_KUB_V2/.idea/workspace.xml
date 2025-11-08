@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B/NavMesh-PlaneForSpawn_A.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B/NavMesh-PlaneForSpawn_A.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B/NavMesh-PlaneForSpawn_A.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B/NavMesh-PlaneForSpawn_A.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/WoundController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script/WoundController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XRI/Settings/Resources/InteractionLayerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +135,7 @@
       <workItem from="1762396399791" duration="4597000" />
       <workItem from="1762402440928" duration="6355000" />
       <workItem from="1762421160457" duration="355000" />
-      <workItem from="1762491200159" duration="7288000" />
+      <workItem from="1762491200159" duration="8119000" />
     </task>
     <servers />
   </component>
