@@ -1,8 +1,19 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class StretcherSpawner_Adjustable : MonoBehaviour
 {
+    [Header("XR Socket (ต้องใส่)")]
+    [Tooltip("XR Socket ของผู้บาดเจ็บ (ให้ลาก XRSocketInteractor มาวางที่นี่)")]
+    public XRSocketInteractor tagSocket;
+
+    [Header("เงื่อนไขบัตรที่อนุญาต")]
+    [Tooltip("Tag ของบัตรที่ต้องการ (เช่น Black, Red, Yellow, Green)")]
+    public string requiredItemTag = "Black";
+    [Tooltip("ถ้าตั้งไว้ จะตรวจชื่อ Prefab/วัตถุด้วย (เช่น Black_Tag-Triage) — ไม่ตั้งได้")]
+    public string optionalRequiredNameContains = "Black_Tag-Triage";
+
     [Header("References")]
     [Tooltip("Prefab ของ Army Stretcher")]
     public GameObject stretcherPrefab;
@@ -12,10 +23,6 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
 
     [Tooltip("จุดปลายทางที่เปลจะเคลื่อนไป (ไม่บังคับ)")]
     public Transform destinationPoint;
-
-    [Header("Triage Tag Settings")]
-    [Tooltip("Prefab ของบัตรที่ถูกต้อง (Red_Tag-Triage หรือ Yellow_Tag-Triage)")]
-    public GameObject correctTagPrefab;
 
     [Header("Stretcher Placement")]
     [Tooltip("ระยะยก/กดเปลจากตำแหน่งผู้บาดเจ็บ (โลก)")]
@@ -29,7 +36,6 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
     [Tooltip("ชื่อ Anchor บนเปล (ถ้าไม่พบจะใช้ตัวเปลเอง)")]
     public string stretcherAnchorName = "PatientAnchor";
 
-    // ====== จุดสำคัญ: ตัวปรับตำแหน่งผู้บาดเจ็บบนเปล ======
     [Tooltip("ออฟเซ็ตตำแหน่ง 'ท้องถิ่น' ของผู้บาดเจ็บบนเปล (แกนของ Anchor/เปล)")]
     public Vector3 patientLocalOffset = new Vector3(0f, 0.05f, 0f);
 
@@ -49,23 +55,72 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
     public float moveSpeed = 1.5f;
     public float arriveThreshold = 0.1f;
 
+    // ภายใน
     private bool stretcherSpawned = false;
     private GameObject spawnedStretcher;
-    private Transform cachedAnchor; // เก็บ Anchor ที่ใช้จริง
+    private Transform cachedAnchor;
 
-    void OnTriggerEnter(Collider other)
+    void OnEnable()
     {
-        if (stretcherSpawned) return;
-
-        // ตรวจด้วยชื่อ (กันกรณี Tag ยังไม่ตั้ง)
-        if (correctTagPrefab != null && other.name.Contains(correctTagPrefab.name))
+        if (tagSocket != null)
         {
-            StartCoroutine(SpawnAndAlign());
+            tagSocket.selectEntered.AddListener(OnSocketSelectEntered);
+            // (ไม่จำเป็น แต่ถ้าอยากรู้ตอนเอาออก)
+            // tagSocket.selectExited.AddListener(OnSocketSelectExited);
         }
+        else
+        {
+            Debug.LogWarning($"{name}: ยังไม่ได้อ้างอิง XRSocketInteractor (tagSocket).");
+        }
+    }
+
+    void OnDisable()
+    {
+        if (tagSocket != null)
+        {
+            tagSocket.selectEntered.RemoveListener(OnSocketSelectEntered);
+            // tagSocket.selectExited.RemoveListener(OnSocketSelectExited);
+        }
+    }
+
+    // ถูกเรียก “เมื่อตัวบัตรถูกวางลงใน Socket แล้วจริง ๆ”
+    private void OnSocketSelectEntered(SelectEnterEventArgs args)
+    {
+        if (stretcherSpawned) return; // ทำครั้งเดียวพอ
+
+        var tr = args.interactableObject.transform;
+        var go = tr.gameObject;
+
+        // 1) ตรวจ Tag (ถ้ากำหนด)
+        if (!string.IsNullOrEmpty(requiredItemTag))
+        {
+            if (!go.CompareTag(requiredItemTag))
+            {
+                // ถ้าบัตรไม่ใช่ Tag ที่ต้องการ ให้ Socket ปล่อยออก (กันวางผิด)
+                tagSocket.interactionManager.SelectExit(tagSocket, args.interactableObject);
+                Debug.LogWarning($"{name}: วางบัตรผิดสี/ผิด Tag (ต้องการ Tag: {requiredItemTag})");
+                return;
+            }
+        }
+
+        // 2) ตรวจชื่อ (ถ้าตั้งไว้เพื่อกันผิด Prefab)
+        if (!string.IsNullOrEmpty(optionalRequiredNameContains))
+        {
+            if (!go.name.Contains(optionalRequiredNameContains))
+            {
+                tagSocket.interactionManager.SelectExit(tagSocket, args.interactableObject);
+                Debug.LogWarning($"{name}: วางบัตรไม่ถูกต้อง (ต้องมีชื่อรวมคำว่า: {optionalRequiredNameContains})");
+                return;
+            }
+        }
+
+        // ผ่านเงื่อนไข → ค่อยสั่งสร้างเปล
+        StartCoroutine(SpawnAndAlign());
     }
 
     private IEnumerator SpawnAndAlign()
     {
+        if (stretcherSpawned) yield break;
         stretcherSpawned = true;
 
         if (stretcherPrefab == null || patientTransform == null)
@@ -74,16 +129,14 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
             yield break;
         }
 
-        // 1) สร้างเปล “ใต้ผู้บาดเจ็บ” และหมุนตามผู้บาดเจ็บ + offset
+        // สร้างเปล “ใต้ผู้บาดเจ็บ” และหมุนตาม + offset
         Quaternion baseRot = patientTransform.rotation * Quaternion.Euler(stretcherRotationOffset);
         Vector3 spawnPos = patientTransform.position + new Vector3(0, stretcherVerticalOffset, 0);
-
         spawnedStretcher = Instantiate(stretcherPrefab, spawnPos, baseRot);
 
-        // เผื่อให้ Mesh/Physics ประกอบตัว
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f); // เผื่อประกอบ
 
-        // 2) หา Anchor บนเปล (ถ้าเลือกใช้)
+        // หา Anchor
         cachedAnchor = spawnedStretcher.transform;
         if (useStretcherAnchor)
         {
@@ -91,22 +144,17 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
             if (found != null) cachedAnchor = found;
         }
 
-        // 3) จัดวางผู้บาดเจ็บบนเปล (ปรับเฉพาะตำแหน่ง)
+        // จัดวางผู้บาดเจ็บบนเปล (เฉพาะตำแหน่ง)
         ApplyPatientPosition();
 
         if (parentPatientToStretcher)
-        {
             patientTransform.SetParent(spawnedStretcher.transform, true);
-        }
 
-        // 4) เคลื่อนไปจุดปลายทางถ้ามี
+        // ย้ายไปจุดปลายทาง (ถ้ามี)
         if (destinationPoint != null)
-        {
             StartCoroutine(MoveToDestination());
-        }
     }
 
-    // เรียกทุกเฟรมเพื่อให้ปรับค่า X/Y/Z ได้สด ๆ ตอนเทส
     void LateUpdate()
     {
         if (continuousRepositionWhilePlaying && spawnedStretcher != null && cachedAnchor != null)
@@ -115,17 +163,10 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// จัดตำแหน่งผู้บาดเจ็บบนเปล โดย "เน้นเฉพาะ Position"
-    /// - ใช้ local offset บนแกนของ Anchor/เปล
-    /// - บวก world offset เพิ่มเติม
-    /// - Rotation ของผู้บาดเจ็บจะไม่ถูกเปลี่ยนถ้า dontChangePatientRotation = true
-    /// </summary>
     private void ApplyPatientPosition()
     {
         if (patientTransform == null || cachedAnchor == null) return;
 
-        // world position จาก local offset
         Vector3 worldFromLocal = cachedAnchor.TransformPoint(patientLocalOffset);
         Vector3 finalWorldPos = worldFromLocal + patientWorldOffset;
 
@@ -133,7 +174,6 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
 
         if (!dontChangePatientRotation)
         {
-            // ถ้าต้องการให้หมุนตาม Anchor ให้เปิด option นี้ (ปิดค่า default)
             patientTransform.rotation = cachedAnchor.rotation;
         }
     }
@@ -150,7 +190,6 @@ public class StretcherSpawner_Adjustable : MonoBehaviour
         }
     }
 
-    // วาด gizmo ช่วยตั้งตำแหน่ง (ตอนเลือกวัตถุ)
     void OnDrawGizmosSelected()
     {
         if (spawnedStretcher != null)
