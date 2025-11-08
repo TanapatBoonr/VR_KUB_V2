@@ -127244,6 +127244,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 290206126435221246, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1106301699463247833, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_LeftHandTurnAction.m_Reference
       value: 
@@ -127311,6 +127315,26 @@ PrefabInstance:
     - target: {fileID: 4049155060942398267, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4296154915132838317, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448023907177144332, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737837055325681321, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_TeleportInteractor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737837055325681321, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_TeleportModeCancel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737837055325681321, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_TeleportModeActivate
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9025115348771056584, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_LeftHandSnapTurnAction.m_Reference

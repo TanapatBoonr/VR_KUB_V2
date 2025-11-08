@@ -11,45 +11,62 @@ public class GreenPatientV2 : MonoBehaviour
     [Header("พื้นฐาน / การเคลื่อนที่")]
     public NavMeshAgent agent;
     public Transform playerCamera;
+    [Tooltip("ระยะที่หยุดหน้าผู้เล่น")]
     public float stopDistanceFromPlayer = 1.5f;
-    public float idleAfterStandSeconds = 0.75f;
 
-    [Header("ปลายทางเมื่อภารกิจเสร็จ")]
+    [Header("ปลายทางหลังได้รับบัตร")]
     public Transform finalDestination;
 
-    [Header("Animator (ถ้ามี)")]
+    [Header("Animator (ใช้พารามิเตอร์เดิมของคุณ)")]
+    public Animator animator;
+    [Tooltip("Bool เดิน/หยุด (true=เดิน, false=Idle)")]
+    public string paramMoveBool = "Move";
+    [Tooltip("Trigger ให้ลุกยืน")]
+    public string paramStandUpTrigger = "StandUp";
+    [Tooltip("ชื่อ State ท่าลุก (ต้องตรงกับชื่อใน Animator)")]
     public string animStandUp = "G2 Standing Up";
-    public string animIdle   = "G2 Idle";
-    public string animWalk   = "G2 Walk";
-    private Animator _anim;
+    [Tooltip("ชื่อ State Idle (ต้องตรงกับชื่อใน Animator)")]
+    public string animIdle = "G2 Idle";
+
+    [Header("การรอ StandUp และ Idle")]
+    [Tooltip("เวลาขั้นต่ำที่ต้องปล่อยให้ท่าลุกเล่น")]
+    public float standUpMinSeconds = 0.35f;
+    [Tooltip("รอให้ท่าลุกจบครบอย่างน้อย 1 รอบ (ถ้าระบบหา State ได้)")]
+    public bool waitStandUpOneCycle = true;
+
+    [Tooltip("เวลาขั้นต่ำที่ต้องยืน Idle ก่อนเริ่มเดิน")]
+    public float idleMinSeconds = 0.75f;
+    [Tooltip("รอให้อนิเมชัน Idle จบครบอย่างน้อย 1 รอบ (ถ้าระบบหา State ได้)")]
+    public bool waitIdleOneCycle = true;
+    [Tooltip("จำนวนรอบ Idle ที่อยากรอก่อนเดิน (ใช้เมื่อเปิด waitIdleOneCycle)")]
+    public int idleCyclesToWait = 1;
 
     [Header("XR Socket / บัตร")]
-    public GameObject tagSocketObject;       // Cube ที่มี XRSocketInteractor
+    public GameObject tagSocketObject;                // Cube ที่มี XRSocketInteractor
     public XRSocketInteractor tagSocket;
 
-    [Tooltip("ทางที่ 1: ถ้ามี Tag จริงใน Project (เช่น 'Green') ให้ใส่ตรงนี้")]
+    [Tooltip("วิธีที่ 1: เช็ค Tag ของบัตร (ถ้ามี Tag จริงใน Project)")]
     public string requiredTagName = "Green";
-
-    [Tooltip("ทางที่ 2: ถ้าไม่สร้าง Tag ให้เช็คจากชื่อ เช่น 'Green_Tag-Triage'")]
+    [Tooltip("วิธีที่ 2: เช็คจากชื่อ GameObject เช่น 'Green_Tag-Triage'")]
     public string requiredNameContains = "Green_Tag-Triage";
-
-    [Tooltip("ทางที่ 3: ลาก Prefab ของบัตรที่ยอมรับได้ (หนึ่งหรือหลายชิ้น)")]
+    [Tooltip("วิธีที่ 3: ลาก Prefab ของบัตรที่ยอมรับได้ (หนึ่งหรือหลายอัน)")]
     public GameObject[] allowedPrefabs;
-    private HashSet<string> _allowedPrefabNames; // เก็บชื่อ Prefab เพื่อเทียบตอนรัน
+    private HashSet<string> _allowedPrefabNames;
 
     [Header("ผู้บาดเจ็บหูหนวก")]
     public bool isDeaf = false;
 
-    [Header("UI (World Space) สำหรับเคสหูหนวก")]
+    [Header("UI (World Space) สำหรับหูหนวก")]
     public Button uiAskSpeakBtn;
     public Button uiAskMoveBtn;
     public GameObject uiAnswerYesGraphic;
     public float uiAnswerDuration = 1.2f;
 
     [Header("ตัวเลือกเพิ่มเติม")]
+    [Tooltip("เมื่อยืนถึงผู้เล่นแล้ว เปิด Socket ให้วางบัตร")]
     public bool enableSocketWhenReachPlayer = true;
 
-    // สถานะภายใน
+    // สถานะ
     private bool _isWalkingToPlayer = false;
     private bool _reachedPlayer = false;
     private bool _tagAttached = false;
@@ -58,77 +75,30 @@ public class GreenPatientV2 : MonoBehaviour
     void Awake()
     {
         if (agent == null) agent = GetComponent<NavMeshAgent>();
-        _anim = GetComponent<Animator>();
+        if (animator == null) animator = GetComponent<Animator>();
         if (playerCamera == null && Camera.main != null) playerCamera = Camera.main.transform;
 
         if (tagSocketObject != null) tagSocketObject.SetActive(false);
-        SetupUIDeaf(false);
+        if (tagSocket != null) tagSocket.selectEntered.AddListener(OnTagAttachedEvent);
 
-        if (tagSocket != null)
-            tagSocket.selectEntered.AddListener(OnTagAttachedEvent);
-
-        // เตรียมชุดชื่อ Prefab ที่ยอมรับ (ไม่มี PrefabUtility → ใช้ชื่อแทน ใช้ได้ตอน Build)
         _allowedPrefabNames = new HashSet<string>();
         if (allowedPrefabs != null)
-        {
             foreach (var p in allowedPrefabs)
                 if (p != null) _allowedPrefabNames.Add(p.name);
-        }
 
         MegaphoneController.OnMegaphoneStateChanged += OnMegaphoneToggle;
+
+        SetupUIDeaf(false);
+        SetMove(false); // เริ่มต้นเป็น Idle
+        if (agent != null) agent.isStopped = true;
     }
 
     void OnDestroy()
     {
-        if (tagSocket != null)
-            tagSocket.selectEntered.RemoveListener(OnTagAttachedEvent);
-
+        if (tagSocket != null) tagSocket.selectEntered.RemoveListener(OnTagAttachedEvent);
         MegaphoneController.OnMegaphoneStateChanged -= OnMegaphoneToggle;
     }
 
-    // ---------------- โทรโข่ง ----------------
-    private void OnMegaphoneToggle(bool isOn)
-    {
-        if (_finished || _tagAttached || _isWalkingToPlayer) return;
-        if (!isOn) return;
-        if (isDeaf) return;
-
-        StartCoroutine(Co_StandIdleThenWalkToPlayer());
-    }
-
-    private IEnumerator Co_StandIdleThenWalkToPlayer()
-    {
-        PlayAnim(animStandUp);
-        yield return new WaitForSeconds(Mathf.Max(0.1f, idleAfterStandSeconds * 0.5f));
-
-        PlayAnim(animIdle);
-        yield return new WaitForSeconds(idleAfterStandSeconds);
-
-        _isWalkingToPlayer = true;
-        EnsureAgentOnNavMesh();
-        MoveTo(GetPointInFrontOfPlayer());
-        PlayAnim(animWalk);
-
-        while (!_reachedPlayer && !_tagAttached)
-        {
-            if (playerCamera != null)
-            {
-                var a = new Vector3(transform.position.x, 0f, transform.position.z);
-                var b = new Vector3(playerCamera.position.x, 0f, playerCamera.position.z);
-                if (Vector3.Distance(a, b) <= stopDistanceFromPlayer + 0.05f)
-                {
-                    _reachedPlayer = true;
-                    agent.isStopped = true;
-                    PlayAnim(animIdle);
-                    if (enableSocketWhenReachPlayer && tagSocketObject != null)
-                        tagSocketObject.SetActive(true);
-                }
-            }
-            yield return null;
-        }
-    }
-
-    // ---------------- เคสหูหนวก ----------------
     void Start()
     {
         if (isDeaf)
@@ -139,6 +109,163 @@ public class GreenPatientV2 : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // ขับ Move bool ด้วยความเร็วของ Agent → กันอาการ “สไลด์ด้วย Idle”
+        DriveAnimatorByAgentSpeed();
+
+        // เผื่อ event ไม่ยิง ตรวจซ้ำว่ามีของใน socket ไหม
+        if (!_tagAttached && !_finished && tagSocket != null && tagSocket.hasSelection)
+        {
+            var sel = tagSocket.interactablesSelected.FirstOrDefault();
+            TryHandleTag(sel);
+        }
+    }
+
+    // ---------- โทรโข่ง ----------
+    private void OnMegaphoneToggle(bool isOn)
+    {
+        if (_finished || _tagAttached || _isWalkingToPlayer) return;
+        if (!isOn) return;
+        if (isDeaf) return;
+
+        StartCoroutine(Co_StandUpThenIdleThenWalkToPlayer());
+    }
+
+    private IEnumerator Co_StandUpThenIdleThenWalkToPlayer()
+    {
+        // 0) หยุดเคลื่อนที่ระหว่างลุก/Idle
+        if (agent) agent.isStopped = true;
+        SetMove(false);
+
+        // 1) เล่น StandUp แบบ “บังคับให้เสร็จรอบก่อน”
+        yield return StartCoroutine(Co_PlayStateFully(animStandUp, useTrigger: true, minSeconds: standUpMinSeconds, waitOneCycle: waitStandUpOneCycle));
+
+        // 2) เข้า Idle แล้ว “รอ Idle ให้พอ” ตามที่ตั้ง
+        yield return StartCoroutine(Co_PlayIdlePhase());
+
+        // 3) เริ่มเดินเข้าหาผู้เล่น
+        _isWalkingToPlayer = true;
+        EnsureAgentOnNavMesh();
+        MoveTo(GetPointInFrontOfPlayer());
+
+        while (!_reachedPlayer && !_tagAttached)
+        {
+            if (playerCamera != null)
+            {
+                var a = new Vector3(transform.position.x, 0f, transform.position.z);
+                var b = new Vector3(playerCamera.position.x, 0f, playerCamera.position.z);
+                if (Vector3.Distance(a, b) <= stopDistanceFromPlayer + 0.05f)
+                {
+                    _reachedPlayer = true;
+                    if (agent) agent.isStopped = true;
+                    SetMove(false);
+                    if (enableSocketWhenReachPlayer && tagSocketObject != null)
+                        tagSocketObject.SetActive(true);
+                }
+            }
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// เล่น state ที่กำหนดให้ “จบอย่างน้อย 1 รอบ” (หรือเวลาขั้นต่ำ) แล้วค่อยออก
+    /// </summary>
+    private IEnumerator Co_PlayStateFully(string stateName, bool useTrigger, float minSeconds, bool waitOneCycle)
+    {
+        if (animator == null || string.IsNullOrEmpty(stateName))
+        {
+            // ไม่มีอนิเมชัน → รอขั้นต่ำแทน
+            if (minSeconds > 0f) yield return new WaitForSeconds(minSeconds);
+            yield break;
+        }
+
+        // ยิง Trigger ถ้าต้องการ
+        if (useTrigger && !string.IsNullOrEmpty(paramStandUpTrigger))
+        {
+            animator.ResetTrigger(paramStandUpTrigger);
+            animator.SetTrigger(paramStandUpTrigger);
+        }
+        else
+        {
+            animator.CrossFadeInFixedTime(stateName, 0.1f);
+        }
+
+        // รอจนเข้าจริง ๆ
+        int hash = Animator.StringToHash(stateName);
+        float safetyEnter = 1.5f;
+        float enterEnd = Time.time + safetyEnter;
+        while (Time.time < enterEnd)
+        {
+            if (!animator.IsInTransition(0))
+            {
+                var st = animator.GetCurrentAnimatorStateInfo(0);
+                if (st.shortNameHash == hash || st.IsName(stateName))
+                    break;
+            }
+            yield return null;
+        }
+
+        // เวลาที่ต้องรออย่างน้อย
+        float atLeast = Mathf.Max(0f, minSeconds);
+
+        // ถ้าต้องการรอ 1 รอบ และรู้ความยาวคลิป
+        float length = 0f;
+        bool hasLen = false;
+        if (waitOneCycle)
+        {
+            var st = animator.GetCurrentAnimatorStateInfo(0);
+            length = st.length / Mathf.Max(0.001f, animator.speed);
+            hasLen = length > 0.001f;
+            if (hasLen) atLeast = Mathf.Max(atLeast, length);
+        }
+
+        if (atLeast > 0f) yield return new WaitForSeconds(atLeast);
+    }
+
+    /// <summary>
+    /// เข้า Idle แล้วรอตาม idleMinSeconds และ/หรือ idleCyclesToWait
+    /// </summary>
+    private IEnumerator Co_PlayIdlePhase()
+    {
+        float t0 = Time.time;
+
+        if (!string.IsNullOrEmpty(animIdle) && animator != null)
+            animator.CrossFadeInFixedTime(animIdle, 0.1f);
+
+        float idleLen = 0f;
+        bool hasLen = false;
+        int idleHash = !string.IsNullOrEmpty(animIdle) ? Animator.StringToHash(animIdle) : 0;
+
+        if (animator != null && idleHash != 0)
+        {
+            float safety = 1.5f;
+            float end = Time.time + safety;
+            while (Time.time < end)
+            {
+                if (!animator.IsInTransition(0))
+                {
+                    var st = animator.GetCurrentAnimatorStateInfo(0);
+                    if (st.shortNameHash == idleHash || st.IsName(animIdle))
+                    {
+                        idleLen = st.length / Mathf.Max(0.001f, animator.speed);
+                        hasLen = idleLen > 0.001f;
+                        break;
+                    }
+                }
+                yield return null;
+            }
+        }
+
+        float atLeast = Mathf.Max(0f, idleMinSeconds);
+        if (waitIdleOneCycle && hasLen)
+            atLeast = Mathf.Max(atLeast, idleLen * Mathf.Max(1, idleCyclesToWait));
+
+        float remain = atLeast - (Time.time - t0);
+        if (remain > 0f) yield return new WaitForSeconds(remain);
+    }
+
+    // ---------- หูหนวก ----------
     private void SetupUIDeaf(bool on)
     {
         if (uiAskSpeakBtn) uiAskSpeakBtn.gameObject.SetActive(on);
@@ -159,7 +286,7 @@ public class GreenPatientV2 : MonoBehaviour
     {
         StartCoroutine(Co_ShowYesThen(() =>
         {
-            if (tagSocketObject != null) tagSocketObject.SetActive(true);
+            if (tagSocketObject) tagSocketObject.SetActive(true);
             if (uiAskMoveBtn) uiAskMoveBtn.gameObject.SetActive(false);
         }));
     }
@@ -175,20 +302,10 @@ public class GreenPatientV2 : MonoBehaviour
         after?.Invoke();
     }
 
-    // ---------------- รับบัตร (อีเวนต์) ----------------
+    // ---------- รับบัตร ----------
     private void OnTagAttachedEvent(SelectEnterEventArgs args)
     {
         TryHandleTag(args.interactableObject as IXRSelectInteractable);
-    }
-
-    // ---------------- รับบัตร (ตรวจซ้ำใน Update) ----------------
-    void Update()
-    {
-        if (!_tagAttached && !_finished && tagSocket != null && tagSocket.hasSelection)
-        {
-            var sel = tagSocket.interactablesSelected.FirstOrDefault();
-            TryHandleTag(sel);
-        }
     }
 
     private void TryHandleTag(IXRSelectInteractable sel)
@@ -198,75 +315,46 @@ public class GreenPatientV2 : MonoBehaviour
         var tr = (sel as Component)?.transform;
         if (tr == null) return;
 
-        // ===== 3 ชั้นในการตรวจสอบ =====
         bool ok = false;
-
-        // ชั้น 1: Tag (ถ้ามี Tag ในโปรเจกต์)
-        if (!string.IsNullOrEmpty(requiredTagName))
-            ok |= SafeCompareTag(tr.gameObject, requiredTagName);
-
-        // ชั้น 2: ชื่อวัตถุ (เช่น Green_Tag-Triage)
-        if (!ok && !string.IsNullOrEmpty(requiredNameContains))
-            ok |= tr.name.Contains(requiredNameContains);
-
-        // ชั้น 3: ตรงกับ Prefab ที่ลากไว้ (เทียบชื่อ prefab กับชื่ออินสแตนซ์ตัด "(Clone)")
+        if (!string.IsNullOrEmpty(requiredTagName)) ok |= SafeCompareTag(tr.gameObject, requiredTagName);
+        if (!ok && !string.IsNullOrEmpty(requiredNameContains)) ok |= tr.name.Contains(requiredNameContains);
         if (!ok && _allowedPrefabNames != null && _allowedPrefabNames.Count > 0)
-        {
-            string instName = StripCloneSuffix(tr.name);
-            ok |= _allowedPrefabNames.Contains(instName);
-        }
+            ok |= _allowedPrefabNames.Contains(StripClone(tr.name));
 
         if (!ok)
         {
-            // ไม่ผ่าน → คายบัตรออก
             tagSocket.interactionManager.SelectExit(tagSocket, sel);
-            Debug.LogWarning($"{name}: Wrong triage item. Need Tag='{requiredTagName}' OR Name contains '{requiredNameContains}' OR in allowedPrefabs.");
+            Debug.LogWarning($"{name}: Wrong triage item.");
             return;
         }
 
-        // ===== ผ่านแล้ว เริ่มเดินไปปลายทาง =====
         _tagAttached = true;
         EnsureAgentOnNavMesh();
-        agent.isStopped = false;
+        if (agent != null) agent.isStopped = false;
 
         if (finalDestination != null)
         {
             MoveTo(finalDestination.position);
-            PlayAnim(animWalk);
             StartCoroutine(Co_WaitUntilArriveThenFinish());
         }
         else
         {
-            Debug.LogWarning($"{name}: finalDestination is NOT assigned. Patient will stay idle.");
-            PlayAnim(animIdle);
+            SetMove(false);
             _finished = true;
         }
-    }
-
-    // ปลอดภัยกับกรณี Tag ไม่ได้ถูก Create ใน Project (จะไม่ throw)
-    private bool SafeCompareTag(GameObject go, string tagText)
-    {
-        if (go == null || string.IsNullOrEmpty(tagText)) return false;
-        try { return go.CompareTag(tagText); }
-        catch { return go.tag == tagText; }
-    }
-
-    private string StripCloneSuffix(string n)
-    {
-        if (string.IsNullOrEmpty(n)) return n;
-        const string clone = "(Clone)";
-        return n.EndsWith(clone) ? n.Substring(0, n.Length - clone.Length) : n;
     }
 
     private IEnumerator Co_WaitUntilArriveThenFinish()
     {
         while (finalDestination != null && !_finished)
         {
+            if (agent == null || !agent.isOnNavMesh) yield break;
+
             float dist = Vector3.Distance(transform.position, finalDestination.position);
             if (dist <= Mathf.Max(agent.stoppingDistance, 0.3f))
             {
                 agent.isStopped = true;
-                PlayAnim(animIdle);
+                SetMove(false);
                 _finished = true;
                 yield break;
             }
@@ -274,20 +362,36 @@ public class GreenPatientV2 : MonoBehaviour
         }
     }
 
-    // ---------------- Utilities ----------------
+    // ---------- Utilities ----------
+    private void SetMove(bool moving)
+    {
+        if (animator == null || string.IsNullOrEmpty(paramMoveBool)) return;
+        animator.SetBool(paramMoveBool, moving);
+    }
+
+    private void DriveAnimatorByAgentSpeed()
+    {
+        if (animator == null || string.IsNullOrEmpty(paramMoveBool)) return;
+
+        bool moving = false;
+        if (agent != null && agent.isOnNavMesh)
+        {
+            moving = !agent.isStopped &&
+                     agent.velocity.magnitude > 0.05f &&
+                     agent.remainingDistance > agent.stoppingDistance;
+        }
+        SetMove(moving);
+    }
+
     private void EnsureAgentOnNavMesh()
     {
         if (agent == null) return;
         if (agent.isOnNavMesh) return;
 
         if (NavMesh.SamplePosition(transform.position, out var hit, 1.0f, NavMesh.AllAreas))
-        {
             agent.Warp(hit.position);
-        }
         else
-        {
             Debug.LogError($"{name}: not on NavMesh and cannot find nearby surface.");
-        }
     }
 
     private void MoveTo(Vector3 worldPos)
@@ -298,6 +402,7 @@ public class GreenPatientV2 : MonoBehaviour
 
         agent.isStopped = false;
         agent.SetDestination(worldPos);
+        // Move bool จะถูกตั้งอัตโนมัติจาก DriveAnimatorByAgentSpeed()
     }
 
     private Vector3 GetPointInFrontOfPlayer()
@@ -310,9 +415,15 @@ public class GreenPatientV2 : MonoBehaviour
         return target;
     }
 
-    private void PlayAnim(string stateName)
+    private static bool SafeCompareTag(GameObject go, string tagText)
     {
-        if (_anim == null || string.IsNullOrEmpty(stateName)) return;
-        _anim.CrossFadeInFixedTime(stateName, 0.1f);
+        if (go == null || string.IsNullOrEmpty(tagText)) return false;
+        try { return go.CompareTag(tagText); }
+        catch { return go.tag == tagText; }
+    }
+    private static string StripClone(string n)
+    {
+        const string c = "(Clone)";
+        return !string.IsNullOrEmpty(n) && n.EndsWith(c) ? n.Substring(0, n.Length - c.Length) : n;
     }
 }
