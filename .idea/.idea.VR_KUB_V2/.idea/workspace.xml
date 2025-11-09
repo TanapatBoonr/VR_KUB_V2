@@ -6,11 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/FreeTime--------Text/NotoSansThai&amp;Eng_SemiCondensed-ExtraLight SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/FreeTime--------Text/NotoSansThai&amp;Eng_SemiCondensed-ExtraLight SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G1/G1 Animator Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G1/G1 Animator Controller.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G10/G10 Animator Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/G/G10/G10 Animator Controller.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/GreenPatientV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/GreenPatientV2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TriageMission/StretcherSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/TriageMission/StretcherSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/hologramMaterial Socket.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/hologramMaterial Socket.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_AlbedoTransparency.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_AlbedoTransparency.1001.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_Normal.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_Normal.1001.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_SpecularSmoothness.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R2_PackedMaterial0_SpecularSmoothness.1001.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R4-Tex.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTyp/R/R2-R4/R4-Tex/R4-Tex.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/GreenPatientV2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/GreenPatientV2.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/XRSocketSnapFix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script--------V2/XRSocketSnapFix.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +151,8 @@
       <workItem from="1762421160457" duration="355000" />
       <workItem from="1762491200159" duration="8119000" />
       <workItem from="1762589070077" duration="4730000" />
-      <workItem from="1762598873595" duration="4032000" />
+      <workItem from="1762598873595" duration="4181000" />
+      <workItem from="1762698023914" duration="2513000" />
     </task>
     <servers />
   </component>
