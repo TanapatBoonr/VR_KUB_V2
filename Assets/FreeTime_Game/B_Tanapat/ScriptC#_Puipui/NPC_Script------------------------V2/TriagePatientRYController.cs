@@ -32,7 +32,7 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
 
     public Button uiAssessButton;           // ปุ่มกด "Assess" (World-Space UI)
     public GameObject uiCantWalkGraphic;    // ข้อความ/กราฟิก "I Can't Walk"
-    public float cantWalkShowSeconds = 1.0f;
+    public float cantWalkShowSeconds = 1.5f;
 
     // ======================================================================
     //  ห้ามเลือด (เลือดพุ่ง): Tourniquet → Top Gauze → เลือดหยุด
