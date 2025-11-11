@@ -6,10 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [DisallowMultipleComponent]
-public class TriagePatientRY_WithStretcher : MonoBehaviour
+public class TriagePatientRYController : MonoBehaviour
 {
     // ======================================================================
     //  CONFIG: สีตั้งต้น + เส้นตายเปลี่ยนสถานะ
+    //  Red  → หมดเวลา = Black
+    //  Yellow → หมดเวลา = Red
     // ======================================================================
     public enum StartClass { Red, Yellow }
     public StartClass startClass = StartClass.Red;
@@ -30,8 +32,11 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
     public Transform playerCamera;
     public float showAssessRadius = 2.2f;
 
-    public Button uiAssessButton;           // ปุ่มกด "Assess" (World-Space UI)
-    public GameObject uiCantWalkGraphic;    // ข้อความ/กราฟิก "I Can't Walk"
+    [Tooltip("ปุ่ม World-Space UI ที่ตัวผู้บาดเจ็บเพื่อเริ่มประเมิน")]
+    public Button uiAssessButton;
+
+    [Tooltip("กราฟิก/ข้อความ \"I Can't Walk\"")]
+    public GameObject uiCantWalkGraphic;
     public float cantWalkShowSeconds = 1.5f;
 
     // ======================================================================
@@ -41,34 +46,47 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
     public bool hasArterialBleed = false;
     public GameObject bleedParticle;
 
-    public XRSocketInteractor tourniquetSocket;      // ขั้นที่ 1
-    public XRSocketInteractor gauzeSocket;           // ขั้นที่ 2
+    [Tooltip("XR Socket ขั้นที่ 1: Tourniquet")]
+    public XRSocketInteractor tourniquetSocket;
 
-    [Tooltip("ตรวจด้วย Tag ของไอเท็ม (วิธีที่ 1)")]
+    [Tooltip("XR Socket ขั้นที่ 2: Top Gauze")]
+    public XRSocketInteractor gauzeSocket;
+
+    [Tooltip("วิธีตรวจด้วย Tag ของไอเท็ม (วิธีที่ 1)")]
     public string tourniquetItemTag = "Tourniquet";
-    public string topGauzeItemTag = "TopGauze";
+    public string topGauzeItemTag  = "TopGauze";
 
     [Tooltip("หรือเจาะจง Prefab (วิธีที่ 2)")]
     public GameObject tourniquetPrefab;
     public GameObject topGauzePrefab;
 
     // ======================================================================
-    //  TRIAGE TAG SOCKET (จะแสดงเมื่อผ่านเงื่อนไขครบ)
+    //  TRIAGE TAG SOCKET (จะเปิดหลังผ่านขั้นตอนด้านบนครบ)
     // ======================================================================
     [Header("Triage Tag Socket")]
     public GameObject triageTagSocketObject;
     public XRSocketInteractor triageTagSocket;
 
-    [Header("บัตรที่ถูกต้อง (Prefab/Tag)")]
-    [Tooltip("บัตรที่ถูกต้อง 'ก่อน' เดดไลน์ (ลาก Prefab ของบัตร)")]
-    public GameObject validTagPrefab_BeforeDeadline;    // แดง→Red / เหลือง→Yellow
+    [Header("บัตรที่ถูกต้อง (ก่อน/หลังเส้นตาย)")]
+    [Tooltip("บัตรที่ถูกต้อง 'ก่อนเดดไลน์' (Red/Yellow ตามเคสเริ่มต้น)")]
+    public GameObject validTagPrefab_BeforeDeadline;
 
-    [Tooltip("บัตรที่ถูกต้อง 'หลัง' เดดไลน์ (ลาก Prefab ของบัตร)")]
-    public GameObject validTagPrefab_AfterDeadline;     // แดง→Black / เหลือง→Red
+    [Tooltip("บัตรที่ถูกต้อง 'หลังเดดไลน์' (Red→Black / Yellow→Red)")]
+    public GameObject validTagPrefab_AfterDeadline;
 
-    [Tooltip("สำรอง: ตรวจด้วยชื่อ Tag ของ GameObject บัตร")]
-    public string validTagName_BeforeDeadline;          // "Red" หรือ "Yellow"
-    public string validTagName_AfterDeadline;           // "Black" หรือ "Red"
+    [Tooltip("สำรอง: ตรวจด้วย Tag ของบัตร (ถ้าไม่ใช้ Prefab)")]
+    public string validTagName_BeforeDeadline;   // "Red" หรือ "Yellow"
+    public string validTagName_AfterDeadline;    // "Black" หรือ "Red"
+
+    // ======================================================================
+    //  TAG MOUNT (ตำแหน่งติดบัตรให้ไปกับตัว/เปล)
+    // ======================================================================
+    [Header("Triage Tag Mount (ตำแหน่งติดบัตร)")]
+    [Tooltip("จุด/Anchor ที่ให้บัตรไปเกาะ (หน้าอก/ข้อมือ หรือ Anchor บนเปล)")]
+    public Transform tagMountPoint;
+    public Vector3 tagLocalOffset = Vector3.zero;
+    public Vector3 tagLocalEuler  = Vector3.zero;
+    public Vector3 tagLocalScale  = Vector3.one;
 
     // ======================================================================
     //  STRETCHER (สปอว์นเปล แล้วยก/ย้ายผู้บาดเจ็บไปยังจุดหมาย)
@@ -92,7 +110,7 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
     public float arriveThreshold = 0.1f;
 
     // ======================================================================
-    //  EVENTS (เผื่ออยากเชื่อมระบบอื่นเพิ่ม)
+    //  EVENTS (เผื่อเชื่อมระบบคะแนน/เสียง/ภารกิจ)
     // ======================================================================
     [Header("Extra Events")]
     public UnityEvent onAssessStarted;
@@ -124,20 +142,17 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
         currentClass = (startClass == StartClass.Red) ? CurrentClass.Red : CurrentClass.Yellow;
 
         // ปิด UI/Socket ที่ยังไม่ถึงคิว
-        if (uiAssessButton) uiAssessButton.gameObject.SetActive(false);
+        if (uiAssessButton)   uiAssessButton.gameObject.SetActive(false);
         if (uiCantWalkGraphic) uiCantWalkGraphic.SetActive(false);
 
-        // *** ปิดซ็อกเก็ตของเลือดพุ่งทั้งหมดไว้ก่อนเสมอ (ต้องกด Assess ก่อนเท่านั้นถึงเปิดได้) ***
         SafeSetActive(tourniquetSocket, false);
-        SafeSetActive(gauzeSocket, false);
+        SafeSetActive(gauzeSocket,      false);
 
-        // เลือดพุ่งเริ่มต้นโชว์/ไม่โชว์ได้ตามต้องการ (ส่วนใหญ่จะโชว์ไว้ก่อน)
         if (bleedParticle) bleedParticle.SetActive(hasArterialBleed);
 
-        // ปิดซ็อกเก็ตบัตรไว้ก่อน
         ShowTriageSocket(false);
 
-        // ผูกอีเวนต์
+        // ผูกอีเวนต์ของซ็อกเก็ต
         if (tourniquetSocket) tourniquetSocket.selectEntered.AddListener(OnTourniquetPlaced);
         if (gauzeSocket)      gauzeSocket.selectEntered.AddListener(OnGauzePlaced);
         if (triageTagSocket)  triageTagSocket.selectEntered.AddListener(OnTriageTagPlaced);
@@ -160,7 +175,7 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
         UpdateClassByTime();
         HandleAssessProximity();
 
-        // กันอีเวนต์ตกหล่น: จะตรวจซ้ำเฉพาะ "หลังจากกด Assess แล้วเท่านั้น"
+        // กันอีเวนต์ตกหล่น: ตรวจซ้ำเฉพาะเมื่อ "กด Assess แล้ว"
         if (_assessed && hasArterialBleed)
         {
             if (!_bleedStep1Done && tourniquetSocket && tourniquetSocket.hasSelection)
@@ -207,13 +222,13 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
 
         if (hasArterialBleed)
         {
-            // *** เปิดเฉพาะตอนหลัง Assess เท่านั้น ***
-            SafeSetActive(tourniquetSocket, true);    // เปิดขั้นที่ 1
-            SafeSetActive(gauzeSocket, false);        // ขั้นที่ 2 รอไว้ก่อน
+            // เปิดเฉพาะหลัง Assess
+            SafeSetActive(tourniquetSocket, true); // เปิดขั้นที่ 1
+            SafeSetActive(gauzeSocket, false);     // ยังไม่เปิดขั้นที่ 2
         }
         else
         {
-            ShowTriageSocket(true); // ไม่มีเลือดพุ่ง → เปิดบัตรได้เลยหลัง Assess
+            ShowTriageSocket(true); // ไม่มีเลือดพุ่ง → เปิดบัตรได้หลัง Assess
         }
     }
 
@@ -222,10 +237,9 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
     // ======================================================================
     void OnTourniquetPlaced(SelectEnterEventArgs _)
     {
-        // *** กันการวางก่อน Assess: ถ้ายังไม่ Assess ให้คายของออกทันที ***
         if (!_assessed) { EjectWrong(tourniquetSocket); return; }
-
         if (_bleedStep1Done) return;
+
         if (!IsObjectMatch(tourniquetSocket, tourniquetItemTag, tourniquetPrefab))
         {
             EjectWrong(tourniquetSocket);
@@ -233,14 +247,14 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
         }
 
         _bleedStep1Done = true;
-        SafeSetActive(gauzeSocket, true); // เปิดขั้นที่ 2 หลังผ่านขั้นที่ 1
+        SafeSetActive(gauzeSocket, true); // เปิดขั้นที่ 2
     }
 
     void OnGauzePlaced(SelectEnterEventArgs _)
     {
         if (!_assessed) { EjectWrong(gauzeSocket); return; }
-
         if (!_bleedStep1Done || _bleedStep2Done) return;
+
         if (!IsObjectMatch(gauzeSocket, topGauzeItemTag, topGauzePrefab))
         {
             EjectWrong(gauzeSocket);
@@ -267,10 +281,8 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
             try { if (tr.CompareTag(wantTag)) return true; }
             catch { if (tr.tag == wantTag) return true; }
         }
-
-        // เทียบชื่อ prefab (ตัด (Clone))
-        if (wantPrefab != null && StripClone(tr.name) == wantPrefab.name)
-            return true;
+        // เทียบชื่อ prefab (ตัด "(Clone)")
+        if (wantPrefab != null && StripClone(tr.name) == wantPrefab.name) return true;
 
         return false;
     }
@@ -291,11 +303,18 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
     {
         if (triageTagSocketObject) triageTagSocketObject.SetActive(on);
         if (triageTagSocket) triageTagSocket.enabled = on;
+
+        // ถ้าปิดแล้วมีของอยู่ ให้คายออกกันค้าง
+        if (!on && triageTagSocket && triageTagSocket.hasSelection && triageTagSocket.interactionManager != null)
+        {
+            var sel = triageTagSocket.interactablesSelected.FirstOrDefault();
+            if (sel != null) triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
+        }
     }
 
     void OnTriageTagPlaced(SelectEnterEventArgs _)
     {
-        // *** ต้อง Assess ก่อน และ (ถ้ามีเลือดพุ่ง) ต้องผ่านทั้ง 2 ขั้นก่อน ***
+        // ต้อง Assess ก่อน และ (ถ้ามีเลือดพุ่ง) ต้องผ่านทั้ง 2 ขั้น
         if (!_assessed) { EjectWrong(triageTagSocket); return; }
         if (hasArterialBleed && !(_bleedStep1Done && _bleedStep2Done)) { EjectWrong(triageTagSocket); return; }
         if (triageTagSocket == null || !triageTagSocket.hasSelection) return;
@@ -308,12 +327,20 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
             return;
         }
 
+        // ปลดจากซ็อกเก็ต → ติดบัตรไว้กับผู้บาดเจ็บ/เปล
+        if (triageTagSocket.interactionManager != null && sel != null)
+            triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
+
+        AttachTagToMount(tr);
+
         _triageAccepted = true;
         onTriageAccepted?.Invoke();
 
         // ล็อกไว้ไม่ให้ถอนบัตร
         if (triageTagSocket) triageTagSocket.enabled = false;
+        if (triageTagSocketObject) triageTagSocketObject.SetActive(false);
 
+        // ไปกระบวนการเปล
         if (!_stretcherSpawned) StartCoroutine(Co_SpawnStretcherAndMove());
     }
 
@@ -335,6 +362,34 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
         if (want != null && StripClone(tagTr.name) == want.name) return true;
 
         return false;
+    }
+
+    // ======================================================================
+    //  ATTACH TAG TO MOUNT (ให้บัตรติดไปกับคนเจ็บ/เปล)
+    // ======================================================================
+    void AttachTagToMount(Transform tagTr)
+    {
+        if (tagTr == null) return;
+
+        // ปิดการโต้ตอบ/ฟิสิกส์ของบัตรเพื่อให้ติดนิ่ง
+        var grab = tagTr.GetComponent<XRGrabInteractable>();
+        var rb   = tagTr.GetComponent<Rigidbody>();
+        if (grab) grab.enabled = false;
+        if (rb)
+        {
+            rb.isKinematic = true;
+            rb.useGravity  = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // เลือกพาเรนต์ที่จะติดบัตร
+        Transform parent = tagMountPoint != null ? tagMountPoint : (patientRoot != null ? patientRoot : transform);
+        tagTr.SetParent(parent, worldPositionStays: false);
+
+        tagTr.localPosition = tagLocalOffset;
+        tagTr.localRotation = Quaternion.Euler(tagLocalEuler);
+        tagTr.localScale    = tagLocalScale;
     }
 
     // ======================================================================
@@ -450,7 +505,11 @@ public class TriagePatientRY_WithStretcher : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(destinationPoint.position, 0.15f);
         }
+        if (tagMountPoint)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(tagMountPoint.position, Vector3.one * 0.05f);
+        }
     }
 #endif
 }
-

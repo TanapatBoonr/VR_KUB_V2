@@ -72,6 +72,20 @@ public class GreenPatientV2 : MonoBehaviour
     private bool _tagAttached = false;
     private bool _finished = false;
 
+    // -------------------- ScoreV2.5 hooks --------------------
+    private ScoreV2_5 _score;
+    private ScoreV2_5 Score() {
+        if (_score == null) _score = FindObjectOfType<ScoreV2_5>();
+        return _score;
+    }
+    private void RegisterColor(ScoreV2_5.TriageColor color, bool correct = true) {
+        Score()?.RegisterTagResult(color, correct);
+    }
+    private void RegisterFinished() {
+        Score()?.RegisterPatientFinished();
+    }
+    // ---------------------------------------------------------
+
     void Awake()
     {
         if (agent == null) agent = GetComponent<NavMeshAgent>();
@@ -329,6 +343,10 @@ public class GreenPatientV2 : MonoBehaviour
         }
 
         _tagAttached = true;
+
+        // ---- ScoreV2.5: นับว่า "บัตรเขียวถูกต้อง" ----
+        RegisterColor(ScoreV2_5.TriageColor.Green, true);
+
         EnsureAgentOnNavMesh();
         if (agent != null) agent.isStopped = false;
 
@@ -341,6 +359,8 @@ public class GreenPatientV2 : MonoBehaviour
         {
             SetMove(false);
             _finished = true;
+            // ถึงแม้จะไม่มีปลายทาง ก็นับว่าเคสนี้เสร็จแล้วได้เช่นกัน (ถ้าต้องการ)
+            RegisterFinished();
         }
     }
 
@@ -356,6 +376,10 @@ public class GreenPatientV2 : MonoBehaviour
                 agent.isStopped = true;
                 SetMove(false);
                 _finished = true;
+
+                // ---- ScoreV2.5: รายงานว่า "ผู้บาดเจ็บรายนี้เสร็จแล้ว" ----
+                RegisterFinished();
+
                 yield break;
             }
             yield return null;

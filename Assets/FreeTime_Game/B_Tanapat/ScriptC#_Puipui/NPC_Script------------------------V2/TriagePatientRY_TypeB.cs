@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [DisallowMultipleComponent]
-public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
+public class TriagePatientRY_TypeB : MonoBehaviour
 {
     // ======================================================================
     //  CONFIG: สีตั้งต้น + เส้นตายเปลี่ยนสถานะ
@@ -64,6 +64,16 @@ public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
     [Header("สำรอง: ตรวจด้วยชื่อ Tag ของ GameObject บัตร (ไม่จำเป็นต้องใช้ถ้าตรวจด้วย Prefab)")]
     public string correctTagName_BeforeDeadline; // เช่น "Red" หรือ "Yellow"
     public string correctTagName_AfterDeadline;  // เช่น "Black" หรือ "Red"
+
+    // ======================================================================
+    //  TAG MOUNT: จุดติดบัตรให้ไปกับตัว/เปล
+    // ======================================================================
+    [Header("Triage Tag Mount")]
+    [Tooltip("Empty/Transform ที่จะให้บัตรไปเกาะ (เช่น หน้าอก/ข้อมือ หรือ Anchor บนเปล)")]
+    public Transform tagMountPoint;
+    public Vector3 tagLocalOffset = Vector3.zero;
+    public Vector3 tagLocalEuler = Vector3.zero;
+    public Vector3 tagLocalScale = Vector3.one;
 
     // ======================================================================
     //  STRETCHER (สปอว์นเปล แล้วยก/ย้ายผู้บาดเจ็บไปยังจุดหมาย)
@@ -222,6 +232,14 @@ public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
             return;
         }
 
+        // ---------------- แนบบัตรให้ติดไปกับตัว/เปล ----------------
+        // ปลดออกจากซ็อกเก็ตก่อน แล้วค่อยแนบ
+        if (triageTagSocket && triageTagSocket.interactionManager != null && sel != null)
+            triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
+
+        AttachTagToMount(tr);
+
+        // -------------------------------------------------------------
         _triageAccepted = true;
         onTriageAccepted?.Invoke();
 
@@ -238,18 +256,18 @@ public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
 
         bool afterDeadline = IsAfterDeadline();
 
-        // ชุดตรวจที่ "กำหนดเฉพาะเคสนี้" ผ่าน Inspector
-        string wantTagName  = afterDeadline ? correctTagName_AfterDeadline  : correctTagName_BeforeDeadline;
+        // กำหนดบัตรที่ควรถูกต้องตามสถานะ/เวลา
         GameObject wantPref = afterDeadline ? correctTagPrefab_AfterDeadline : correctTagPrefab_BeforeDeadline;
+        string    wantTag   = afterDeadline ? correctTagName_AfterDeadline  : correctTagName_BeforeDeadline;
 
-        // 1) ตรวจด้วย Tag
-        if (!string.IsNullOrEmpty(wantTagName))
+        // 1) ตรวจด้วย Tag (ถ้ากำหนด)
+        if (!string.IsNullOrEmpty(wantTag))
         {
-            try { if (tagTr.CompareTag(wantTagName)) return true; }
-            catch { if (tagTr.tag == wantTagName) return true; }
+            try { if (tagTr.CompareTag(wantTag)) return true; }
+            catch { if (tagTr.tag == wantTag) return true; }
         }
 
-        // 2) ตรวจด้วยชื่อ Prefab (ตัด (Clone))
+        // 2) ตรวจด้วยชื่อ Prefab
         if (wantPref != null && StripClone(tagTr.name) == wantPref.name)
             return true;
 
@@ -266,7 +284,36 @@ public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
     }
 
     // ======================================================================
-    //  STRETcher FLOW (เหมือน StretcherSpawner.cs แบบย่อ)
+    //  ATTACH TAG TO MOUNT
+    // ======================================================================
+    void AttachTagToMount(Transform tagTr)
+    {
+        if (tagTr == null) return;
+
+        // ปิดการโต้ตอบ/ฟิสิกส์ของบัตร เพื่อให้ติดนิ่ง
+        var grab = tagTr.GetComponent<XRGrabInteractable>();
+        var rb   = tagTr.GetComponent<Rigidbody>();
+
+        if (grab) grab.enabled = false;
+        if (rb)
+        {
+            rb.isKinematic = true;
+            rb.useGravity  = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // เลือกพาเรนต์สำหรับติดบัตร: ถ้ามี tagMountPoint ใช้อันนั้น, ไม่มีก็ใช้ patientRoot หรือ transform ตัวเอง
+        Transform parent = tagMountPoint != null ? tagMountPoint : (patientRoot != null ? patientRoot : transform);
+        tagTr.SetParent(parent, worldPositionStays: false);
+
+        tagTr.localPosition = tagLocalOffset;
+        tagTr.localRotation = Quaternion.Euler(tagLocalEuler);
+        tagTr.localScale    = tagLocalScale;
+    }
+
+    // ======================================================================
+    //  STRETCHER FLOW (เหมือน StretcherSpawner.cs แบบย่อ)
     // ======================================================================
     IEnumerator Co_SpawnStretcherAndMove()
     {
@@ -363,6 +410,12 @@ public class TriagePatientRY_TypeB_WithStretcher : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(destinationPoint.position, 0.15f);
+        }
+
+        if (tagMountPoint)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(tagMountPoint.position, Vector3.one * 0.05f);
         }
     }
 #endif
