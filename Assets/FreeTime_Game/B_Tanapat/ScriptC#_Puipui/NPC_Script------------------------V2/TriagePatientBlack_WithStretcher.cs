@@ -2,38 +2,34 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [DisallowMultipleComponent]
 public class TriagePatientBlack_WithStretcher : MonoBehaviour
 {
     // ======================================================================
-    //  TRIAGE TAG SOCKET (ผู้บาดเจ็บสีดำ: รับบัตร Black แล้วหามทันที)
+    //  TRIAGE TAG SOCKET (ตัวรับบัตรจริง)
     // ======================================================================
-    [Header("Triage Tag Socket (Black only)")]
-    [Tooltip("GameObject ของจุด Socket (จะเปิดตั้งแต่เริ่ม)")]
+    [Header("Triage Tag Socket (Receiver)")]
+    [Tooltip("GameObject ของซ็อกเก็ตตัวรับ (เปิดตอนเริ่ม)")]
     public GameObject triageTagSocketObject;
 
-    [Tooltip("XRSocketInteractor ของจุดรับบัตร")]
+    [Tooltip("XRSocketInteractor ของซ็อกเก็ตตัวรับ")]
     public XRSocketInteractor triageTagSocket;
 
     [Header("บัตรที่ถูกต้อง (ตั้งให้เป็น Black)")]
-    [Tooltip("ลาก Prefab บัตรสีดำ (Black_Tag-Triage) มาใส่เพื่อตรวจแบบชื่อ prefab")]
+    [Tooltip("ลาก Prefab/Instance ของบัตรดำ (เช่น Black_Tag-Triage) มาเพื่อตรวจด้วยชื่อ")]
     public GameObject validBlackTagPrefab;
 
-    [Tooltip("หรือกำหนด Tag ของบัตร เช่น \"Black\" (กรณีอยากตรวจด้วย Tag แทน prefab)")]
+    [Tooltip("หรือกำหนด Tag ของบัตร เช่น \"Black\" (ถ้าอยากตรวจด้วย Tag)")]
     public string validBlackTagName = "Black";
 
     // ======================================================================
-    //  TAG MOUNT: จุดติดบัตรให้ไปกับตัว/เปล
+    //  DISPLAY GROUP (ตัวโชว์ทับที่ซ็อกเก็ตรับหลังรับบัตรแล้ว)
     // ======================================================================
-    [Header("Triage Tag Mount (ตำแหน่งติดบัตร)")]
-    [Tooltip("จุดที่ให้บัตรไปเกาะ (เช่น หน้าอก/ข้อมือ หรือ Anchor บนเปล)")]
-    public Transform tagMountPoint;
-    public Vector3 tagLocalOffset = Vector3.zero;
-    public Vector3 tagLocalEuler  = Vector3.zero;
-    public Vector3 tagLocalScale  = Vector3.one;
+    [Header("Tag Display Group (ตัวโชว์แทนหลังรับบัตร)")]
+    [Tooltip("กลุ่มอ็อบเจ็กต์ที่ใช้โชว์บัตร/ซ็อกเก็ตสำเหร่บ (ลากจาก Hierarchy)")]
+    public GameObject tagDisplayGroup;
 
     // ======================================================================
     //  STRETCHER (สปอว์นเปล แล้วยก/ย้ายผู้บาดเจ็บไปยังจุดหมาย)
@@ -73,7 +69,7 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
     public float arriveThreshold = 0.1f;
 
     // ======================================================================
-    //  EVENTS (เผื่ออยากเชื่อมระบบอื่นเพิ่ม เช่นนับคะแนน/แจ้งเตือน)
+    //  EVENTS (เลือกใช้)
     // ======================================================================
     [Header("Extra Events")]
     public UnityEvent onBlackTagAccepted;   // เมื่อรับบัตรดำถูกต้อง
@@ -87,10 +83,22 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
     bool _stretcherSpawned = false;
     GameObject _stretcher;
 
+    // ======================================================================
+    //  ScoreV2.5 hooks
+    // ======================================================================
+    private ScoreV2_5 _score;
+    private ScoreV2_5 Score() { if (_score == null) _score = FindObjectOfType<ScoreV2_5>(); return _score; }
+    private void RegisterColor(bool correct = true) { Score()?.RegisterTagResult(ScoreV2_5.TriageColor.Black, correct); }
+    private void RegisterFinished() { Score()?.RegisterPatientFinished(); }
+
+    // ======================================================================
+    //  LIFECYCLE
+    // ======================================================================
     void Awake()
     {
-        // เปิด Socket ตั้งแต่เริ่ม (ผู้บาดเจ็บสีดำไม่ต้องผ่านขั้นตอนประเมิน)
+        // เปิดตัวรับ / ปิดตัวโชว์ตอนเริ่ม
         if (triageTagSocketObject) triageTagSocketObject.SetActive(true);
+        if (tagDisplayGroup) tagDisplayGroup.SetActive(false);
 
         if (triageTagSocket)
             triageTagSocket.selectEntered.AddListener(OnTriageTagPlaced);
@@ -104,7 +112,7 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
 
     void Update()
     {
-        // กันอีเวนต์ตกหล่น: ถ้ามีของค้างอยู่ในซ็อกเก็ตและยังไม่ Accept ให้ตรวจซ้ำ
+        // กันอีเวนต์หลุด: ถ้ามีของค้างในซ็อกเก็ตและยังไม่ accept ให้ตรวจซ้ำ
         if (!_triageAccepted && triageTagSocket && triageTagSocket.hasSelection)
         {
             OnTriageTagPlaced(new SelectEnterEventArgs());
@@ -119,29 +127,37 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
         if (_triageAccepted || triageTagSocket == null || !triageTagSocket.hasSelection) return;
 
         var sel = triageTagSocket.interactablesSelected.FirstOrDefault();
-        var tr  = (sel as Component)?.transform;
-        if (tr == null) return;
+        var tagTr = (sel as Component)?.transform;
+        if (tagTr == null) return;
 
-        if (!IsCorrectBlackTag(tr))
+        // ตรวจว่าบัตร "ดำ" ถูกต้องหรือไม่
+        if (!IsCorrectBlackTag(tagTr))
         {
             EjectWrong(triageTagSocket);
             return;
         }
 
-        // ปลดออกจากซ็อกเก็ตก่อน แล้วแนบบัตรให้ติดกับตัว/เปล
+        // ===== โหมด "โชว์กลุ่มแทน" ตามที่ร้องขอ =====
+        // 1) ปิด/ล้างซ็อกเก็ตตัวรับ
         if (triageTagSocket.interactionManager != null && sel != null)
             triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
 
-        AttachTagToMount(tr);
+        triageTagSocket.enabled = false;
+        if (triageTagSocketObject) triageTagSocketObject.SetActive(false);
+
+        // 2) ซ่อนบัตรที่ผู้เล่นนำมาวาง (ไม่ทำลาย)
+        tagTr.gameObject.SetActive(false);
+
+        // 3) เปิด "Tag Display Group" ที่คุณคัดลอกมาวางทับตำแหน่งเดิม
+        if (tagDisplayGroup) tagDisplayGroup.SetActive(true);
 
         _triageAccepted = true;
         onBlackTagAccepted?.Invoke();
 
-        // ล็อกซ็อกเก็ตไม่ให้ถอดบัตร
-        triageTagSocket.enabled = false;
-        if (triageTagSocketObject) triageTagSocketObject.SetActive(false);
+        // ส่งคะแนน (บัตรดำถูกต้อง)
+        RegisterColor(true);
 
-        // ต่อด้วยการหามขึ้นเปลและเคลื่อนไปยังปลายทาง
+        // เคลื่อนย้ายด้วยเปล
         if (!_stretcherSpawned) StartCoroutine(Co_SpawnStretcherAndMove());
     }
 
@@ -149,14 +165,14 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
     {
         if (tagTr == null) return false;
 
-        // 1) ตรวจด้วย Tag ชื่อ "Black" (หรือที่กำหนด)
+        // 1) ตรวจด้วย Tag
         if (!string.IsNullOrEmpty(validBlackTagName))
         {
             try { if (tagTr.CompareTag(validBlackTagName)) return true; }
             catch { if (tagTr.tag == validBlackTagName) return true; }
         }
 
-        // 2) ตรวจด้วยชื่อ Prefab
+        // 2) ตรวจด้วยชื่อ Prefab (ตัด "(Clone)")
         if (validBlackTagPrefab != null && StripClone(tagTr.name) == validBlackTagPrefab.name)
             return true;
 
@@ -170,34 +186,6 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
             var sel = socket.interactablesSelected.FirstOrDefault();
             if (sel != null) socket.interactionManager.SelectExit(socket, sel);
         }
-    }
-
-    // ======================================================================
-    //  ATTACH TAG TO MOUNT (ให้บัตรติดไปกับคนเจ็บ/เปล)
-    // ======================================================================
-    void AttachTagToMount(Transform tagTr)
-    {
-        if (tagTr == null) return;
-
-        // ปิดการโต้ตอบ/ฟิสิกส์ของบัตร เพื่อให้ติดนิ่ง
-        var grab = tagTr.GetComponent<XRGrabInteractable>();
-        var rb   = tagTr.GetComponent<Rigidbody>();
-        if (grab) grab.enabled = false;
-        if (rb)
-        {
-            rb.isKinematic = true;
-            rb.useGravity  = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        // เลือกพาเรนต์สำหรับติดบัตร
-        Transform parent = tagMountPoint != null ? tagMountPoint : (patientRoot != null ? patientRoot : transform);
-        tagTr.SetParent(parent, worldPositionStays: false);
-
-        tagTr.localPosition = tagLocalOffset;
-        tagTr.localRotation = Quaternion.Euler(tagLocalEuler);
-        tagTr.localScale    = tagLocalScale;
     }
 
     // ======================================================================
@@ -253,6 +241,9 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
         }
 
         onDelivered?.Invoke();
+
+        // ส่งผลคะแนน: รายนี้เสร็จสมบูรณ์
+        RegisterFinished();
     }
 
     // ======================================================================
@@ -271,12 +262,6 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(destinationPoint.position, 0.15f);
-        }
-
-        if (tagMountPoint)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(tagMountPoint.position, Vector3.one * 0.05f);
         }
     }
 #endif

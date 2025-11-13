@@ -6,107 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="47d63cb0-1c50-407f-90ec-67185f13d720" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_KUB_V2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleA.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleA.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleB.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleB.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleC.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/BloodParticleC.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleA.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleA.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleB.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleB.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleC.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Materials/GreyscaleParticleC.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_1_greyScale.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_1_greyScale.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_2.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_2_greyScale.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_2_greyScale.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_greyscale.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodGushFX/Textures/BloodParticleFX_greyscale.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodPartcleFX_Scene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodPartcleFX_Scene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX_Colormodifyable.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX_Colormodifyable.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX_Extra.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/BloodSprayFX_Extra.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/ChunkParticleSystem.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/ChunkParticleSystem.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_3.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_3.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_4.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_4.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_5.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_5.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_6.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Gibblets/GibbletChunk_6.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Models.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Models/RockSet2.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Models/RockSet2.obj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Particle System_A.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/Particle System_A.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Materials/Brains_Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Materials/Brains_Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Diffuse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Diffuse.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Displacement.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Displacement.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Gloss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Gloss.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_Normal.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_SpecGloss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/BloodGushFX/brainsAndBlood/Textures/Brains_SpecGloss.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Materials/TileMaterial.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Materials/TileMaterial.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/TilesAlbedo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/TilesAlbedo.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/TilesGloss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/TilesGloss.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/tilesNorm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/tilesNorm.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/tilesNorm_height.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BloodDecalsAndEffects/TiledRoom/Textures/Tiles/tilesNorm_height.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Blood_A.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Blood_A.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/Pick_Item.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom B.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/A_GameScene/TriageRoom.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/Fire/Vefects/Free Fire VFX URP/Lights/VFX_Point_Light.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/Fire/Vefects/Free Fire VFX URP/Lights/VFX_Point_Light.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/Fire/Vefects/Free Fire VFX URP/Materials/M_VFX_Dust_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/Fire/Vefects/Free Fire VFX URP/Materials/M_VFX_Dust_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/characterEffects/shaders/hologramEffect/hologramTextureCool.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/From_UnityAsset/characterEffects/shaders/hologramEffect/hologramTextureCool.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/G/G2.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/GreenPatientV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/GreenPatientV2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/R/R8.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/HumanTypPrefab/R/R8.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientBlack_WithStretcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientBlack_WithStretcher.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientRYController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientRYController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientRY_TypeB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeTime_Game/B_Tanapat/ScriptC#_Puipui/NPC_Script------------------------V2/TriagePatientRY_TypeB.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +148,9 @@
       <workItem from="1762598873595" duration="4181000" />
       <workItem from="1762698023914" duration="2513000" />
       <workItem from="1762752153647" duration="1609000" />
-      <workItem from="1762864974365" duration="13957000" />
+      <workItem from="1762864974365" duration="14556000" />
+      <workItem from="1762916421574" duration="4567000" />
+      <workItem from="1762976449218" duration="4620000" />
     </task>
     <servers />
   </component>

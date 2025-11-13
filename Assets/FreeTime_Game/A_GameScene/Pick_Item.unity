@@ -8046,7 +8046,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2092736195
 MonoBehaviour:
@@ -9252,6 +9252,10 @@ PrefabInstance:
     - target: {fileID: 2736042895468223207, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872009402736469026, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_MoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3421730370695988226, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_Name
