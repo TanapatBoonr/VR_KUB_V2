@@ -1779,7 +1779,7 @@ MonoBehaviour:
   currentSceneName: Pick_Item
   nextSceneName: TriageRoom B
   destinationPointName: Warp_Point&B
-  timeLimitSeconds: 240
+  timeLimitSeconds: 90
   playerInventory: {fileID: 373155876}
   timerText: {fileID: 1631056065}
   missionStartUI: {fileID: 1044850396}
@@ -4485,7 +4485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dba05c910ff86d44956d2ac8d9e522b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
+  targetCamera: {fileID: 6232451080522186060}
 --- !u!114 &1435635291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4536,7 +4536,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 6232451080522186061}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -9249,6 +9249,14 @@ PrefabInstance:
       propertyPath: m_LeftHandTurnAction.m_Reference
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2473409261963271610, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.019536348
+      objectReference: {fileID: 0}
+    - target: {fileID: 2473409261963271610, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8942
+      objectReference: {fileID: 0}
     - target: {fileID: 2736042895468223207, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9305,6 +9313,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5475693036463585610, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.019536348
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475693036463585610, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8942
+      objectReference: {fileID: 0}
+    - target: {fileID: 6700044950940234169, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5205dcaec2dffda478b2415b4675983a, type: 2}
     - target: {fileID: 7473722193948260994, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_TeleportInteractor
       value: 
@@ -9321,6 +9341,10 @@ PrefabInstance:
       propertyPath: m_TeleportModeActivate
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8480246084329773641, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5205dcaec2dffda478b2415b4675983a, type: 2}
     - target: {fileID: 9025115348771056584, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       propertyPath: m_LeftHandSnapTurnAction.m_Reference
       value: 
@@ -9330,6 +9354,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+--- !u!4 &6232451080522186060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3616115718606393293, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+  m_PrefabInstance: {fileID: 6232451080522186059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &6232451080522186061 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2736042894977783444, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+  m_PrefabInstance: {fileID: 6232451080522186059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6480704319351017917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1772434006291588983, guid: 9684092aefbe287429a7c97c1700a2f7, type: 3}
