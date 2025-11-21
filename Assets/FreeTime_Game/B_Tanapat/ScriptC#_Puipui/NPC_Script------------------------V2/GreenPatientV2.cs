@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -14,8 +15,23 @@ public class GreenPatientV2 : MonoBehaviour
     [Tooltip("ระยะที่หยุดหน้าผู้เล่น")]
     public float stopDistanceFromPlayer = 1.5f;
 
-    [Header("ปลายทางหลังได้รับบัตร")]
+    [Header("ปลายทางหลังได้รับบัตร (ค่าเริ่มต้น)")]
+    [Tooltip("ใช้เมื่อหาเป้าหมายตาม Plane ไม่ได้")]
     public Transform finalDestination;
+
+    // =========================== NEW: ปลายทางตาม Plane ===========================
+    [Header("Per-Plane Destinations (เลือกปลายทางตามโซนที่เล่น)")]
+    public Transform destinationA;
+    public Transform destinationB;
+    public Transform destinationC;
+    public Transform destinationD;
+    public Transform destinationE;
+    public Transform destinationF;
+
+    [Header("Active Plane (optional)")]
+    [Tooltip("ปล่อยว่างได้ ถ้ามี ScoreV2_5 อยู่ในซีน สคริปต์จะพยายามอ่านโซนปัจจุบันจาก ScoreV2_5 อัตโนมัติ")]
+    public string activePlaneId = ""; // "A".."F" หรือเว้นว่างให้สคริปต์ลองอ่านจาก ScoreV2_5
+    // ============================================================================
 
     [Header("Animator (ใช้พารามิเตอร์เดิมของคุณ)")]
     public Animator animator;
@@ -115,6 +131,10 @@ public class GreenPatientV2 : MonoBehaviour
 
     void Start()
     {
+        // ถ้าตั้ง activePlaneId มาตั้งแต่แรก ก็ sync ปลายทางให้เลย
+        if (!string.IsNullOrEmpty(activePlaneId))
+            ApplyPlaneDestination(activePlaneId);
+
         if (isDeaf)
         {
             SetupUIDeaf(true);
@@ -152,10 +172,10 @@ public class GreenPatientV2 : MonoBehaviour
         if (agent) agent.isStopped = true;
         SetMove(false);
 
-        // 1) เล่น StandUp แบบ “บังคับให้เสร็จรอบก่อน”
-        yield return StartCoroutine(Co_PlayStateFully(animStandUp, useTrigger: true, minSeconds: standUpMinSeconds, waitOneCycle: waitStandUpOneCycle));
+        // 1) เล่น StandUp
+        yield return StartCoroutine(Co_PlayStateFully(animStandUp, useTrigger: true, minSeconds: standUpMinSeconds, waitStandUpOneCycle));
 
-        // 2) เข้า Idle แล้ว “รอ Idle ให้พอ” ตามที่ตั้ง
+        // 2) เข้า Idle แล้ว “รอ Idle ให้พอ”
         yield return StartCoroutine(Co_PlayIdlePhase());
 
         // 3) เริ่มเดินเข้าหาผู้เล่น
@@ -182,19 +202,14 @@ public class GreenPatientV2 : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// เล่น state ที่กำหนดให้ “จบอย่างน้อย 1 รอบ” (หรือเวลาขั้นต่ำ) แล้วค่อยออก
-    /// </summary>
     private IEnumerator Co_PlayStateFully(string stateName, bool useTrigger, float minSeconds, bool waitOneCycle)
     {
         if (animator == null || string.IsNullOrEmpty(stateName))
         {
-            // ไม่มีอนิเมชัน → รอขั้นต่ำแทน
             if (minSeconds > 0f) yield return new WaitForSeconds(minSeconds);
             yield break;
         }
 
-        // ยิง Trigger ถ้าต้องการ
         if (useTrigger && !string.IsNullOrEmpty(paramStandUpTrigger))
         {
             animator.ResetTrigger(paramStandUpTrigger);
@@ -205,7 +220,6 @@ public class GreenPatientV2 : MonoBehaviour
             animator.CrossFadeInFixedTime(stateName, 0.1f);
         }
 
-        // รอจนเข้าจริง ๆ
         int hash = Animator.StringToHash(stateName);
         float safetyEnter = 1.5f;
         float enterEnd = Time.time + safetyEnter;
@@ -220,10 +234,8 @@ public class GreenPatientV2 : MonoBehaviour
             yield return null;
         }
 
-        // เวลาที่ต้องรออย่างน้อย
         float atLeast = Mathf.Max(0f, minSeconds);
 
-        // ถ้าต้องการรอ 1 รอบ และรู้ความยาวคลิป
         float length = 0f;
         bool hasLen = false;
         if (waitOneCycle)
@@ -237,9 +249,6 @@ public class GreenPatientV2 : MonoBehaviour
         if (atLeast > 0f) yield return new WaitForSeconds(atLeast);
     }
 
-    /// <summary>
-    /// เข้า Idle แล้วรอตาม idleMinSeconds และ/หรือ idleCyclesToWait
-    /// </summary>
     private IEnumerator Co_PlayIdlePhase()
     {
         float t0 = Time.time;
@@ -347,6 +356,11 @@ public class GreenPatientV2 : MonoBehaviour
         // ---- ScoreV2.5: นับว่า "บัตรเขียวถูกต้อง" ----
         RegisterColor(ScoreV2_5.TriageColor.Green, true);
 
+        // ---- NEW: เลือกปลายทางตาม Plane ที่ผู้เล่นเลือก ----
+        ResolveActivePlaneFromScoreIfNeeded();
+        var dest = GetDestinationFor(activePlaneId);
+        if (dest != null) finalDestination = dest;
+
         EnsureAgentOnNavMesh();
         if (agent != null) agent.isStopped = false;
 
@@ -359,7 +373,6 @@ public class GreenPatientV2 : MonoBehaviour
         {
             SetMove(false);
             _finished = true;
-            // ถึงแม้จะไม่มีปลายทาง ก็นับว่าเคสนี้เสร็จแล้วได้เช่นกัน (ถ้าต้องการ)
             RegisterFinished();
         }
     }
@@ -450,4 +463,55 @@ public class GreenPatientV2 : MonoBehaviour
         const string c = "(Clone)";
         return !string.IsNullOrEmpty(n) && n.EndsWith(c) ? n.Substring(0, n.Length - c.Length) : n;
     }
+
+    // =========================== NEW: helpers สำหรับ Plane ===========================
+    public void ApplyPlaneDestination(string planeId)
+    {
+        activePlaneId = planeId;
+        var dest = GetDestinationFor(activePlaneId);
+        if (dest != null) finalDestination = dest;
+    }
+
+    private Transform GetDestinationFor(string planeId)
+    {
+        if (string.IsNullOrEmpty(planeId)) return null;
+        switch (planeId.Trim().ToUpper())
+        {
+            case "A": return destinationA;
+            case "B": return destinationB;
+            case "C": return destinationC;
+            case "D": return destinationD;
+            case "E": return destinationE;
+            case "F": return destinationF;
+            default:  return null;
+        }
+    }
+
+    private void ResolveActivePlaneFromScoreIfNeeded()
+    {
+        if (!string.IsNullOrEmpty(activePlaneId)) return;
+
+        var sc = Score();
+        if (sc == null) return;
+
+        // พยายามอ่านทั้ง Property และ Field (รองรับโปรเจ็กต์เดิมของคุณ)
+        var t = sc.GetType();
+
+        // public string CurrentAreaId {get;}
+        var prop = t.GetProperty("CurrentAreaId", BindingFlags.Instance | BindingFlags.Public);
+        if (prop != null && prop.PropertyType == typeof(string))
+        {
+            var v = prop.GetValue(sc) as string;
+            if (!string.IsNullOrEmpty(v)) { activePlaneId = v; return; }
+        }
+
+        // private string _currentArea;
+        var field = t.GetField("_currentArea", BindingFlags.Instance | BindingFlags.NonPublic);
+        if (field != null && field.FieldType == typeof(string))
+        {
+            var v = field.GetValue(sc) as string;
+            if (!string.IsNullOrEmpty(v)) { activePlaneId = v; return; }
+        }
+    }
+    // ================================================================================
 }
