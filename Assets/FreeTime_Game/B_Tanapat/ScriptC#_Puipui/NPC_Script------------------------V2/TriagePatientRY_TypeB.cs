@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -64,12 +65,22 @@ public class TriagePatientRY_TypeB : MonoBehaviour
     public Vector3  tagLocalScale  = Vector3.one;
 
     // ======================================================================
-    //  STRETCHER
+    //  STRETCHER + จุดหมายแบบไดนามิกตาม Plane (A–F)
     // ======================================================================
     [Header("Stretcher Settings")]
     public GameObject stretcherPrefab;
     public Transform  patientRoot;
+
+    [Tooltip("Fallback ปลายทาง ถ้าหา A–F ไม่เจอจะใช้ค่านี้")]
     public Transform  destinationPoint;
+
+    [Header("Destinations per Plane (กำหนดปลายทางแยกแต่ละจุด)")]
+    public Transform destA;
+    public Transform destB;
+    public Transform destC;
+    public Transform destD;
+    public Transform destE;
+    public Transform destF;
 
     [Header("การจัดวางเปล/ผู้บาดเจ็บ")]
     public float   stretcherVerticalOffset = -0.05f;
@@ -170,7 +181,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
         if (uiAssessButton) uiAssessButton.gameObject.SetActive(near);
     }
 
-    IEnumerator Co_AssessFlow()
+    System.Collections.IEnumerator Co_AssessFlow()
     {
         _assessed = true;
         onAssessStarted?.Invoke();
@@ -206,7 +217,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
         if (!_assessed) { EjectWrong(triageTagSocket); return; }
         if (triageTagSocket == null || !triageTagSocket.hasSelection) return;
 
-        var sel  = triageTagSocket.interactablesSelected.FirstOrDefault();
+        var sel   = triageTagSocket.interactablesSelected.FirstOrDefault();
         var tagTr = (sel as Component)?.transform;
 
         if (!IsCorrectTriageItem(tagTr))
@@ -215,7 +226,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
             return;
         }
 
-        // ปลดจาก Socket อย่างเป็นทางการ แล้วติดบัตรเข้าตัว/เปล
+        // ปลดจาก Socket แล้วติดบัตรเข้าตัว/เปล
         if (triageTagSocket.interactionManager != null && sel != null)
             triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
 
@@ -277,9 +288,9 @@ public class TriagePatientRY_TypeB : MonoBehaviour
     }
 
     // ======================================================================
-    //  STRETCHER FLOW
+    //  STRETCHER FLOW (เลือกปลายทางตาม Plane A–F)
     // ======================================================================
-    IEnumerator Co_SpawnStretcherAndMove()
+    System.Collections.IEnumerator Co_SpawnStretcherAndMove()
     {
         _stretcherSpawned = true;
 
@@ -289,6 +300,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
             yield break;
         }
 
+        // 1) สร้างเปลใต้ตัวผู้บาดเจ็บ
         Quaternion baseRot = patientRoot.rotation * Quaternion.Euler(stretcherRotationOffset);
         Vector3 spawnPos   = patientRoot.position + new Vector3(0f, stretcherVerticalOffset, 0f);
         _stretcher = Instantiate(stretcherPrefab, spawnPos, baseRot);
@@ -296,6 +308,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
 
         yield return new WaitForSeconds(0.05f);
 
+        // 2) หา Anchor บนเปล
         Transform anchor = _stretcher.transform;
         if (useStretcherAnchor)
         {
@@ -303,6 +316,7 @@ public class TriagePatientRY_TypeB : MonoBehaviour
             if (found) anchor = found;
         }
 
+        // 3) วางผู้บาดเจ็บบนเปล + ออฟเซ็ต
         Vector3 worldTarget =
             anchor.position +
             anchor.right   * patientLocalOffset.x +
@@ -314,18 +328,68 @@ public class TriagePatientRY_TypeB : MonoBehaviour
 
         if (parentPatientToStretcher) patientRoot.SetParent(_stretcher.transform, true);
 
-        if (destinationPoint != null)
+        // 4) เลือกปลายทางตาม Plane (A–F)
+        Transform dynDest = ResolveDestinationFromPlane();
+        Transform finalDest = dynDest != null ? dynDest : destinationPoint;
+
+        // 5) เคลื่อนเปลไปยังปลายทาง
+        if (finalDest != null)
         {
-            while (Vector3.Distance(_stretcher.transform.position, destinationPoint.position) > arriveThreshold)
+            while (Vector3.Distance(_stretcher.transform.position, finalDest.position) > arriveThreshold)
             {
-                Vector3 dir = (destinationPoint.position - _stretcher.transform.position).normalized;
+                Vector3 dir = (finalDest.position - _stretcher.transform.position).normalized;
                 _stretcher.transform.position += dir * moveSpeed * Time.deltaTime;
                 yield return null;
             }
         }
 
         onDelivered?.Invoke();
-        RegisterFinished(); // <- แจ้ง Score ว่าเคสนี้เสร็จสมบูรณ์
+        RegisterFinished(); // แจ้ง Score ว่าเคสนี้เสร็จ
+    }
+
+    // ----- เลือกปลายทางจากรหัส Plane ปัจจุบัน -----
+    Transform ResolveDestinationFromPlane()
+    {
+        string id = GetCurrentAreaIdFromScore()?.ToUpperInvariant();
+        if (string.IsNullOrEmpty(id)) return null;
+
+        switch (id)
+        {
+            case "A": return destA ? destA : destinationPoint;
+            case "B": return destB ? destB : destinationPoint;
+            case "C": return destC ? destC : destinationPoint;
+            case "D": return destD ? destD : destinationPoint;
+            case "E": return destE ? destE : destinationPoint;
+            case "F": return destF ? destF : destinationPoint;
+            default:  return destinationPoint;
+        }
+    }
+
+    // ----- ดึงรหัส Plane จาก ScoreV2_5 แบบยืดหยุ่น -----
+    string GetCurrentAreaIdFromScore()
+    {
+        var sc = Score();
+        if (sc == null) return null;
+
+        var t = sc.GetType();
+
+        // Property: CurrentAreaId
+        var prop = t.GetProperty("CurrentAreaId", BindingFlags.Instance | BindingFlags.Public);
+        if (prop != null && prop.PropertyType == typeof(string))
+            return prop.GetValue(sc, null) as string;
+
+        // Method: GetCurrentAreaId()
+        var m = t.GetMethod("GetCurrentAreaId", BindingFlags.Instance | BindingFlags.Public);
+        if (m != null && m.ReturnType == typeof(string))
+            return m.Invoke(sc, null) as string;
+
+        // Field: currentArea / _currentArea
+        var f = t.GetField("currentArea", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+             ?? t.GetField("_currentArea", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (f != null && f.FieldType == typeof(string))
+            return f.GetValue(sc) as string;
+
+        return null;
     }
 
     // ======================================================================
@@ -372,11 +436,12 @@ public class TriagePatientRY_TypeB : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(destinationPoint.position, 0.15f);
         }
-        if (tagMountPoint)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(tagMountPoint.position, Vector3.one * 0.05f);
-        }
+        if (destA) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destA.position, 0.12f); }
+        if (destB) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destB.position, 0.12f); }
+        if (destC) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destC.position, 0.12f); }
+        if (destD) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destD.position, 0.12f); }
+        if (destE) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destE.position, 0.12f); }
+        if (destF) { Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(destF.position, 0.12f); }
     }
 #endif
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -28,8 +29,28 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
     //  DISPLAY GROUP (ตัวโชว์ทับที่ซ็อกเก็ตรับหลังรับบัตรแล้ว)
     // ======================================================================
     [Header("Tag Display Group (ตัวโชว์แทนหลังรับบัตร)")]
-    [Tooltip("กลุ่มอ็อบเจ็กต์ที่ใช้โชว์บัตร/ซ็อกเก็ตสำเหร่บ (ลากจาก Hierarchy)")]
+    [Tooltip("กลุ่มอ็อบเจ็กต์ที่ใช้โชว์บัตร/ซ็อกเก็ตสำเหร้บ (ลากจาก Hierarchy)")]
     public GameObject tagDisplayGroup;
+
+    // ======================================================================
+    //  DESTINATIONS PER PLANE (A–F)
+    // ======================================================================
+    [Header("Destinations per Plane (A–F)")]
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_A")]
+    public Transform destinationA;
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_B")]
+    public Transform destinationB;
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_C")]
+    public Transform destinationC;
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_D")]
+    public Transform destinationD;
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_E")]
+    public Transform destinationE;
+    [Tooltip("จุดไปส่งเมื่อเลือกเล่น PlaneForSpawn_F")]
+    public Transform destinationF;
+
+    [Tooltip("ปลายทางสำรอง ถ้าอ่านพื้นที่ไม่เจอหรือยังไม่ได้เลือก")]
+    public Transform defaultDestination;
 
     // ======================================================================
     //  STRETCHER (สปอว์นเปล แล้วยก/ย้ายผู้บาดเจ็บไปยังจุดหมาย)
@@ -41,7 +62,7 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
     [Tooltip("Transform ของผู้บาดเจ็บ (root ที่ต้องย้าย/จับวางบนเปล)")]
     public Transform patientRoot;
 
-    [Tooltip("ปลายทางที่ต้องพาคนเจ็บไป")]
+    [Tooltip("ปลายทางที่ต้องพาคนเจ็บไป (ถูกเขียนทับอัตโนมัติจาก A–F เมื่อเริ่มเคลื่อน)")]
     public Transform destinationPoint;
 
     [Header("การจัดวางเปล/ผู้บาดเจ็บ")]
@@ -102,6 +123,9 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
 
         if (triageTagSocket)
             triageTagSocket.selectEntered.AddListener(OnTriageTagPlaced);
+
+        // เผื่ออ่านพื้นที่ได้ตั้งแต่ต้น ก็เลือกปลายทางให้ก่อน (ไม่ซีเรียส ถ้าเปลี่ยนภายหลังจะรีเฟรชอีกครั้ง)
+        RefreshDestinationFromArea();
     }
 
     void OnDestroy()
@@ -157,6 +181,9 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
         // ส่งคะแนน (บัตรดำถูกต้อง)
         RegisterColor(true);
 
+        // รีเฟรชปลายทางจากพื้นที่ที่เลือก ณ ตอนนี้ ก่อนจะเริ่มเคลื่อน
+        RefreshDestinationFromArea();
+
         // เคลื่อนย้ายด้วยเปล
         if (!_stretcherSpawned) StartCoroutine(Co_SpawnStretcherAndMove());
     }
@@ -186,6 +213,62 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
             var sel = socket.interactablesSelected.FirstOrDefault();
             if (sel != null) socket.interactionManager.SelectExit(socket, sel);
         }
+    }
+
+    // ======================================================================
+    //  DESTINATION RESOLUTION (A–F)
+    // ======================================================================
+    public void RefreshDestinationFromArea()
+    {
+        destinationPoint = ResolveDestinationForArea(GetCurrentAreaId()) ?? destinationPoint ?? defaultDestination;
+    }
+
+    Transform ResolveDestinationForArea(string areaId)
+    {
+        if (string.IsNullOrEmpty(areaId)) return defaultDestination;
+
+        switch (areaId.Trim().ToUpperInvariant())
+        {
+            case "A": return destinationA ? destinationA : defaultDestination;
+            case "B": return destinationB ? destinationB : defaultDestination;
+            case "C": return destinationC ? destinationC : defaultDestination;
+            case "D": return destinationD ? destinationD : defaultDestination;
+            case "E": return destinationE ? destinationE : defaultDestination;
+            case "F": return destinationF ? destinationF : defaultDestination;
+            default:  return defaultDestination;
+        }
+    }
+
+    string GetCurrentAreaId()
+    {
+        var s = Score();
+        if (s == null) return null;
+
+        // 1) ถ้ามี property public เช่น CurrentAreaId / CurrentArea / AreaId ให้ใช้ก่อน
+        var propNames = new[] { "CurrentAreaId", "CurrentArea", "AreaId" };
+        foreach (var pn in propNames)
+        {
+            var p = s.GetType().GetProperty(pn, BindingFlags.Instance | BindingFlags.Public);
+            if (p != null && p.PropertyType == typeof(string))
+            {
+                var v = p.GetValue(s) as string;
+                if (!string.IsNullOrEmpty(v)) return v;
+            }
+        }
+
+        // 2) รองรับ field ภายใน (จากเวอร์ชันก่อน ๆ): _currentArea / currentArea
+        var fieldNames = new[] { "_currentArea", "currentArea" };
+        foreach (var fn in fieldNames)
+        {
+            var f = s.GetType().GetField(fn, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            if (f != null && f.FieldType == typeof(string))
+            {
+                var v = f.GetValue(s) as string;
+                if (!string.IsNullOrEmpty(v)) return v;
+            }
+        }
+
+        return null;
     }
 
     // ======================================================================
@@ -229,7 +312,7 @@ public class TriagePatientBlack_WithStretcher : MonoBehaviour
 
         if (parentPatientToStretcher) patientRoot.SetParent(_stretcher.transform, true);
 
-        // 4) เคลื่อนเปลไปยังจุดหมาย
+        // 4) เคลื่อนเปลไปยังจุดหมาย (ใช้ปลายทางที่รีเฟรชแล้ว)
         if (destinationPoint != null)
         {
             while (Vector3.Distance(_stretcher.transform.position, destinationPoint.position) > arriveThreshold)

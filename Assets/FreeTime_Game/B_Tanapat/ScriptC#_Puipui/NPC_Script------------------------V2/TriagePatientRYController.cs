@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Reflection; // สำหรับอ่านค่าจาก ScoreV2_5 แบบ reflection (กรณี field เป็น private)
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -62,10 +63,31 @@ public class TriagePatientRYController : MonoBehaviour
     [Tooltip("ลาก GameObject กลุ่มโชว์บัตรจาก Hierarchy มาใส่ (ให้ปิดไว้ล่วงหน้า)")]
     public GameObject tagDisplayGroup;
 
+    // ======================= PLANE-BASED DESTINATIONS (A–F) =======================
+    public enum AreaSource { AutoFromScore, A, B, C, D, E, F }
+
+    [Header("Plane Destinations (A–F)")]
+    [Tooltip("เลือกแหล่งอ้างอิงพื้นที่ปัจจุบัน: AutoFromScore = อ่านจาก ScoreV2_5, หรือบังคับเลือก A–F")]
+    public AreaSource areaSource = AreaSource.AutoFromScore;
+
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane A")]
+    public Transform destA;
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane B")]
+    public Transform destB;
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane C")]
+    public Transform destC;
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane D")]
+    public Transform destD;
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane E")]
+    public Transform destE;
+    [Tooltip("ปลายทางเมื่อผู้เล่นเลือก Plane F")]
+    public Transform destF;
+
     // ======================= STRETCHER =======================
     [Header("Stretcher Settings")]
     public GameObject stretcherPrefab;
     public Transform  patientRoot;
+    [Tooltip("จะถูกตั้งอัตโนมัติตาม A–F เมื่อรับบัตรแล้ว")]
     public Transform  destinationPoint;
 
     [Header("การจัดวางเปล/ผู้บาดเจ็บ")]
@@ -103,7 +125,11 @@ public class TriagePatientRYController : MonoBehaviour
 
     // ======================= ScoreV2.5 hooks =======================
     private ScoreV2_5 _score;
-    private ScoreV2_5 Score() { if (_score == null) _score = FindObjectOfType<ScoreV2_5>(); return _score; }
+    private ScoreV2_5 Score()
+    {
+        if (_score == null) _score = FindObjectOfType<ScoreV2_5>();
+        return _score;
+    }
     private void RegisterColor(ScoreV2_5.TriageColor color, bool correct = true) { Score()?.RegisterTagResult(color, correct); }
     private void RegisterFinished() { Score()?.RegisterPatientFinished(); }
 
@@ -132,7 +158,6 @@ public class TriagePatientRYController : MonoBehaviour
 
         if (bleedParticle) bleedParticle.SetActive(hasArterialBleed);
 
-        // ปิดของฝั่งโชว์ไว้ก่อน
         if (tagDisplayGroup) tagDisplayGroup.SetActive(false);
 
         ShowTriageSocket(false);
@@ -273,7 +298,7 @@ public class TriagePatientRYController : MonoBehaviour
         }
     }
 
-    // ======================= TRIAGE TAG ACCEPT (เปิดชุดโชว์) =======================
+    // ======================= TRIAGE TAG ACCEPT (เปิดชุดโชว์ + ตั้งปลายทาง A–F) =======================
     void ShowTriageSocket(bool on)
     {
         if (triageTagSocketObject) triageTagSocketObject.SetActive(on);
@@ -298,7 +323,7 @@ public class TriagePatientRYController : MonoBehaviour
         _triageAccepted = true;
         onTriageAccepted?.Invoke();
 
-        // คายของเดิมออกจากซ็อกเก็ตจริงและปิดความสามารถโต้ตอบของมัน
+        // ปลดของออกจากซ็อกเก็ตจริงและปิดความสามารถโต้ตอบของมัน (เราจะใช้ชุดโชว์แทน)
         if (triageTagSocket.interactionManager != null && sel != null)
             triageTagSocket.interactionManager.SelectExit(triageTagSocket, sel);
 
@@ -311,17 +336,75 @@ public class TriagePatientRYController : MonoBehaviour
             tagTr.gameObject.SetActive(false); // ซ่อนบัตรที่ผู้เล่นนำมา
         }
 
-        // เปิด “ชุดโชว์” ที่เตรียมไว้ (วางถูกตำแหน่งในซีนอยู่แล้ว)
+        // เปิด “ชุดโชว์” ที่เตรียมไว้ (วางตำแหน่งไว้คู่ซ็อกเก็ต)
         if (tagDisplayGroup) tagDisplayGroup.SetActive(true);
 
         // ปิดซ็อกเก็ตจริง ไม่ให้รับอะไรต่อ
         triageTagSocket.enabled = false;
         if (triageTagSocketObject) triageTagSocketObject.SetActive(false);
 
+        // ตั้งปลายทางให้ตรงกับพื้นที่ที่ผู้เล่นเลือก A–F
+        ResolveDestinationFromArea();
+
         // แจ้งผลสีให้ Score
         RegisterColor(GetExpectedColorNow(), true);
 
         if (!_stretcherSpawned) StartCoroutine(Co_SpawnStretcherAndMove());
+    }
+
+    // ======================= AREA → DESTINATION =======================
+    void ResolveDestinationFromArea()
+    {
+        string areaId = null;
+
+        if (areaSource == AreaSource.AutoFromScore)
+        {
+            // 1) พยายามเรียก property ชื่อ "CurrentArea"
+            var score = Score();
+            if (score != null)
+            {
+                var prop = score.GetType().GetProperty("CurrentArea", BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                if (prop != null && prop.PropertyType == typeof(string))
+                    areaId = prop.GetValue(score, null) as string;
+
+                // 2) ถ้าไม่มี property ให้ลองอ่าน field private "_currentArea"
+                if (string.IsNullOrEmpty(areaId))
+                {
+                    var field = score.GetType().GetField("_currentArea", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+                    if (field != null && field.FieldType == typeof(string))
+                        areaId = field.GetValue(score) as string;
+                }
+            }
+        }
+        else
+        {
+            // บังคับเลือกจาก Inspector
+            areaId = areaSource.ToString();
+        }
+
+        // normalize
+        if (string.IsNullOrEmpty(areaId)) areaId = "A";
+        areaId = areaId.Trim().ToUpperInvariant();
+
+        Transform target = null;
+        switch (areaId)
+        {
+            case "A": target = destA; break;
+            case "B": target = destB; break;
+            case "C": target = destC; break;
+            case "D": target = destD; break;
+            case "E": target = destE; break;
+            case "F": target = destF; break;
+            default:  target = destA; break;
+        }
+
+        if (target == null)
+        {
+            Debug.LogWarning($"{name}: Destination for Plane {areaId} is NOT assigned. Using existing destinationPoint.");
+            return;
+        }
+
+        destinationPoint = target;
     }
 
     bool IsCorrectTriageItem(Transform tagTr)
@@ -436,4 +519,15 @@ public class TriagePatientRYController : MonoBehaviour
             if (sel != null) socket.interactionManager.SelectExit(socket, sel);
         }
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        if (destinationPoint)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(destinationPoint.position, 0.15f);
+        }
+    }
+#endif
 }
