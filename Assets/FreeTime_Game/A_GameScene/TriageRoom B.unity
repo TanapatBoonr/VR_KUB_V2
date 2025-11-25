@@ -43617,7 +43617,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6004993840572383802, guid: f647ebac3f25b8c4984fdfcc6a4b1f04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1703843717}
   m_SourcePrefab: {fileID: 100100000, guid: f647ebac3f25b8c4984fdfcc6a4b1f04, type: 3}
 --- !u!1 &477047944
 GameObject:
@@ -45738,6 +45741,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4138892155023451917, guid: 2a5762be04a70f64b8466dd0e8d85a28, type: 3}
   m_PrefabInstance: {fileID: 1116942257}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &495664301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495664290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!4 &496277763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3823058510092452012, guid: 935f8022ff548ff4083865a0b10a3a78, type: 3}
@@ -45970,7 +45993,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9177865265719049731, guid: 65c4f01cb0c148d498fdf2fe22500b9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 835316474}
   m_SourcePrefab: {fileID: 100100000, guid: 65c4f01cb0c148d498fdf2fe22500b9e, type: 3}
 --- !u!1 &498952815
 GameObject:
@@ -46116,6 +46142,7 @@ GameObject:
   - component: {fileID: 499179939}
   - component: {fileID: 499179941}
   - component: {fileID: 499179940}
+  - component: {fileID: 499179942}
   m_Layer: 0
   m_Name: Attach Transform (7)
   m_TagString: Untagged
@@ -46222,6 +46249,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &499179942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499179938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1001 &499379127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54987,6 +55030,7 @@ GameObject:
   - component: {fileID: 587361925}
   - component: {fileID: 587361927}
   - component: {fileID: 587361926}
+  - component: {fileID: 587361928}
   m_Layer: 0
   m_Name: Attach Transform (9)
   m_TagString: Untagged
@@ -55093,6 +55137,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &587361928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587361924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &587502908
 GameObject:
   m_ObjectHideFlags: 0
@@ -67960,7 +68020,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 181184560296673039, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1216741737}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8736301873617300567, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1506531289}
   m_SourcePrefab: {fileID: 100100000, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
 --- !u!1001 &718445715
 PrefabInstance:
@@ -79450,6 +79513,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8291397991315574623, guid: 65c4f01cb0c148d498fdf2fe22500b9e, type: 3}
   m_PrefabInstance: {fileID: 497713898}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &835316474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835316472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!1 &835346987
 GameObject:
   m_ObjectHideFlags: 0
@@ -83877,7 +83960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &879446607
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87993,6 +88076,7 @@ GameObject:
   - component: {fileID: 910217326}
   - component: {fileID: 910217328}
   - component: {fileID: 910217327}
+  - component: {fileID: 910217329}
   m_Layer: 0
   m_Name: Attach Transform (2)
   m_TagString: Untagged
@@ -88099,6 +88183,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &910217329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910217325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &911222714
 GameObject:
   m_ObjectHideFlags: 0
@@ -89830,6 +89930,7 @@ GameObject:
   - component: {fileID: 929829638}
   - component: {fileID: 929829640}
   - component: {fileID: 929829639}
+  - component: {fileID: 929829641}
   m_Layer: 0
   m_Name: Attach Transform (1)
   m_TagString: Untagged
@@ -89936,6 +90037,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &929829641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929829637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &930316083
 GameObject:
   m_ObjectHideFlags: 0
@@ -97982,7 +98099,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2736042894755269296, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
       insertIndex: -1
       addedObject: {fileID: 283357399}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3616115718606393294, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2043104082}
   m_SourcePrefab: {fileID: 100100000, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
 --- !u!4 &1007010965 stripped
 Transform:
@@ -106555,7 +106675,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4138892155023451917, guid: 2a5762be04a70f64b8466dd0e8d85a28, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1847342974}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7967327165859228140, guid: 2a5762be04a70f64b8466dd0e8d85a28, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 495664301}
   m_SourcePrefab: {fileID: 100100000, guid: 2a5762be04a70f64b8466dd0e8d85a28, type: 3}
 --- !u!1 &1117132350
 GameObject:
@@ -111273,7 +111396,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7449668184805773909, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
       insertIndex: -1
       addedObject: {fileID: 922099053}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2141945066501958971, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2051662248}
   m_SourcePrefab: {fileID: 100100000, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
 --- !u!1001 &1162104872
 PrefabInstance:
@@ -136170,6 +136296,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4006587545269098990, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
   m_PrefabInstance: {fileID: 1712685192}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1414448382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414448371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!1 &1415915004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3440445292442974280, guid: 935f8022ff548ff4083865a0b10a3a78, type: 3}
@@ -137723,6 +137869,18 @@ PrefabInstance:
       propertyPath: InitialModule.maxNumParticles
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa, type: 3}
+      propertyPath: MaxDistance
+      value: 111.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d0eab726a8a3b3d4b8a0370e5ac8c863, type: 3}
     - target: {fileID: 7234895248809126098, guid: 8206b722d11501a449d6a278cca2adfa, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 10
@@ -143708,6 +143866,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 181184560296673039, guid: 76154fbef8828b349bf05cb47afde7d6, type: 3}
   m_PrefabInstance: {fileID: 718313198}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1506531289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506531278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!4 &1507038867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 483810, guid: 515fff63c7f669d4abf983437c38c0bb, type: 3}
@@ -145468,6 +145646,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5737988848424534031, guid: f11d85c5da129bf44944fed68b07990b, type: 3}
   m_PrefabInstance: {fileID: 1688733538}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1533525114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533525113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!1 &1533808089
 GameObject:
   m_ObjectHideFlags: 0
@@ -147472,6 +147670,7 @@ GameObject:
   - component: {fileID: 1549843417}
   - component: {fileID: 1549843419}
   - component: {fileID: 1549843418}
+  - component: {fileID: 1549843420}
   m_Layer: 0
   m_Name: Attach Transform (4)
   m_TagString: Untagged
@@ -147578,6 +147777,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &1549843420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549843416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &1549888637
 GameObject:
   m_ObjectHideFlags: 0
@@ -160037,7 +160252,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5737988848424534031, guid: f11d85c5da129bf44944fed68b07990b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1533525114}
   m_SourcePrefab: {fileID: 100100000, guid: f11d85c5da129bf44944fed68b07990b, type: 3}
 --- !u!1001 &1689759991
 PrefabInstance:
@@ -162007,6 +162225,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1292644705708556803, guid: f647ebac3f25b8c4984fdfcc6a4b1f04, type: 3}
   m_PrefabInstance: {fileID: 475967065}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1703843717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703843715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!1 &1705034851
 GameObject:
   m_ObjectHideFlags: 0
@@ -162775,7 +163013,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4006587545269098990, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
       insertIndex: -1
       addedObject: {fileID: 663956672}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3157624771961636339, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1414448382}
   m_SourcePrefab: {fileID: 100100000, guid: 8134363f25a40304f98a4f71c14be542, type: 3}
 --- !u!1 &1713349999
 GameObject:
@@ -190700,6 +190941,7 @@ GameObject:
   - component: {fileID: 1977000296}
   - component: {fileID: 1977000298}
   - component: {fileID: 1977000297}
+  - component: {fileID: 1977000299}
   m_Layer: 0
   m_Name: Attach Transform (10)
   m_TagString: Untagged
@@ -190806,6 +191048,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &1977000299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977000295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1001 &1978853517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196712,6 +196970,35 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 125543137}
   m_SourcePrefab: {fileID: 100100000, guid: 935f8022ff548ff4083865a0b10a3a78, type: 3}
+--- !u!1 &2043104081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3616115718606393294, guid: a74710a032e50c943a503aa1c47cef29, type: 3}
+  m_PrefabInstance: {fileID: 1007010964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2043104082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043104081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edccae81ace957745bc2850698a888d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1077442944}
+  minMoveSpeed: 0.05
+  stepDistance: 1.6
+  horizontalOnly: 1
+  teleportSkipDistance: 2
+  audioSource: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: ef4b24ca8d30b6444b2a872bb0826484, type: 3}
+  volume: 0.85
+  pitchMin: 0.96
+  pitchMax: 1.04
+  stopInstantOnIdle: 1
 --- !u!114 &2043657293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197220,6 +197507,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7449668184805773909, guid: 17795c2b31d9e6240a9f44bbcd495e35, type: 3}
   m_PrefabInstance: {fileID: 1159747547}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2051662248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051662237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f527ebaa0c3e9574bb91e064b531c71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  dropClip: {fileID: 0}
+  hoverClip: {fileID: 0}
+  volume: 0.8
+  pitchRandomRange: {x: 0.95, y: 1.05}
+  maxDistance: 10
+  rolloff: 1
+  minInterval: 0.05
 --- !u!1 &2052605461
 GameObject:
   m_ObjectHideFlags: 0
@@ -200819,6 +201126,7 @@ GameObject:
   - component: {fileID: 2094923328}
   - component: {fileID: 2094923330}
   - component: {fileID: 2094923329}
+  - component: {fileID: 2094923331}
   m_Layer: 0
   m_Name: Attach Transform (8)
   m_TagString: Untagged
@@ -200925,6 +201233,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &2094923331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094923327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &2095140155
 GameObject:
   m_ObjectHideFlags: 0
@@ -206024,6 +206348,7 @@ GameObject:
   - component: {fileID: 2145026370}
   - component: {fileID: 2145026372}
   - component: {fileID: 2145026371}
+  - component: {fileID: 2145026373}
   m_Layer: 0
   m_Name: Attach Transform (6)
   m_TagString: Untagged
@@ -206130,6 +206455,22 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &2145026373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145026369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb2f4f0bc0d7bf43a6b933998895e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  detachClip: {fileID: 8300000, guid: 56a7ac75f03397b45bf9f311cdc94a8b, type: 3}
+  volume: 0.8
+  pitchRandomRange: {x: 0.98, y: 1.02}
 --- !u!1 &2146669849 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f8631dd61a0587d45a9cac6e9af89582, type: 3}
